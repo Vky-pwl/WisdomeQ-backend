@@ -1,0 +1,1910 @@
+﻿	
+College
+
+1. http://localhost:8080/quest-web/api/v1.0/ui/college/create
+
+I/P:
+{
+	"collegeName":"SVN College",
+	"collegeCode":"qwe233",
+	"addressLine1":"Yehlanka",
+	"addressLine2":"Airport Road",
+	"city":"Bangalore",
+	"state":"Karnatka",
+	"country":"India",
+	"pinCode":"560001"
+
+}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+
+2. http://localhost:8080/quest-web/api/v1.0/ui/college/update
+
+I/P:
+{
+	"collegeId":1,
+	"collegeName":"SVN College",
+	"addressLine1":"Yehlanka",
+	"addressLine2":"Airport Road",
+	"city":"Bangalore",
+	"state":"Karnatka",
+	"country":"India",
+	"pinCode":"560001"
+
+}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+3. http://localhost:8080/quest-web/api/v1.0/ui/college/read
+I/P:
+{
+	"collegeId":1
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "collegeId": 1,
+        "collegeName": "SVN College",
+        "collegeCode": "qwe233",
+        "addressLine1": "Yehlanka",
+        "addressLine2": "Airport Road",
+        "city": "Bangalore",
+        "state": "Karnatka",
+        "country": "India",
+        "pinCode": "560001",
+        "active": true
+    }
+}
+
+
+
+4.http://localhost:8080/quest-web/api/v1.0/ui/college/list
+
+I/P:
+{
+	"pageNo":1,
+	"pageSize":20,
+	"searchKey":"SVN",
+	"active":true
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "count": 1,
+        "collegeVoList": [
+            {
+                "collegeId": 1,
+                "collegeName": "SVN College",
+                "collegeCode": "qwe233",
+                "addressLine1": "Yehlanka",
+                "addressLine2": "Airport Road",
+                "city": "Bangalore",
+                "state": "Karnatka",
+                "country": "India",
+                "pinCode": "560001",
+                "active": true
+            }
+        ]
+    }
+}
+
+
+Specialization
+1. http://localhost:8080/quest-web/api/v1.0/ui/specialization/create
+
+I/P:
+{
+	"specializationName":"CS",
+	"specializationCode":"qwe233"
+}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+
+2. http://localhost:8080/quest-web/api/v1.0/ui/specialization/update
+
+I/P:
+{
+	"specializationId":1,
+	"specializationName":"CS",
+	"specializationCode":"qwe233",
+	"active":true
+	
+}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+3. http://localhost:8080/quest-web/api/v1.0/ui/specialization/read
+I/P:
+{
+	"specializationId":1
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "specializationId": 1,
+        "specializationName": "CS",
+        "specializationCode": "qwe233",
+        "active": true
+    }
+}
+
+
+4.http://localhost:8080/quest-web/api/v1.0/ui/specialization/list
+
+I/P:
+{
+	"pageNo":1,
+	"pageSize":20,
+	"searchKey":"SVN",
+	"active":true
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "count": 1,
+        "specializationVoList": [
+            {
+                "specializationId": 1,
+                "specializationName": "CS",
+                "specializationCode": "qwe233",
+                "active": true
+            }
+        ]
+    }
+}
+
+
+
+	User
+
+
+1. http://localhost:8080/quest-web/api/v1.0/ui/user/create
+
+I/P:
+{
+	"collegeVo":{
+	"collegeId":1
+	},
+	"specializationVo":{
+	"specializationId":1
+},
+	"firstName":"Satyendra",
+	"middleName":"Kumar",
+	"lastName":"Singh",
+	"gender":"MALE",
+	"dateOfBirth":1537627534,
+	"contactEmail":"sngh542@gmail.com",
+	"password":"welcome@123",
+	"contactNumber":"8880863315",
+	"adhaarNumber":"36638nihdjk",
+	"tenthPercentage":"57",
+	"addressLine1":"NGR LAYOUT",
+	"addressLine2":"4th Cross",
+	"city":"Bangalore",
+	"state":"Karnatka",
+	"country":"India",
+	"pinCode":"560068"
+	
+}
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+
+2. http://localhost:8080/quest-web/api/v1.0/ui/user/update
+
+I/P:
+{
+	"userId":1,
+		"collegeVo":{
+	"collegeId":1
+	},
+	"specializationVo":{
+	"specializationId":1
+	}	
+	"firstName":"Satyendra",
+	"middleName":"Kumar",
+	"lastName":"Singh",
+	"gender":"MALE",
+	"dateOfBirth":1537627534,
+	"contactEmail":"sngh542@gmail.com",
+	"password":"welcome@123",
+	"contactNumber":"8880863315",
+	"adhaarNumber":"36638nihdjk",
+	"tenthPercentage":"57",
+	"addressLine1":"NGR LAYOUT",
+	"addressLine2":"4th Cross",
+	"city":"Bangalore",
+	"state":"Karnatka",
+	"country":"India",
+	"pinCode":"560068"
+
+}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+3. http://localhost:8080/quest-web/api/v1.0/ui/user/read
+I/P:
+{
+	"userId":1
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+                "userId": 4,
+                "collegeVo": {
+                    "collegeId": 5,
+                    "collegeName": "Science College",
+                    "collegeCode": "SCIENC0000000005",
+                    "addressLine1": "Gandhi Maidan",
+                    "addressLine2": "Ashok Rajpath",
+                    "city": "PATNA",
+                    "state": "Bihar",
+                    "country": "India",
+                    "pinCode": "800011",
+                    "active": true
+                },
+                "specializationVo": {
+                    "specializationId": 1,
+                    "specializationName": "CS",
+                    "specializationCode": null,
+                    "active": true
+                },
+                "firstName": "Ravi",
+                "middleName": "",
+                "lastName": "Ranjan",
+                "gender": "MALE",
+                "dateOfBirth": 1537628000,
+                "contactEmail": "ravi.ranjan@gmail.com",
+                "password": null,
+                "contactNumber": "24324234",
+                "adhaarNumber": "36638nihdjsk",
+                "tenthPercentage": "70",
+                "addressLine1": "NGR Layout",
+                "addressLine2": "4th cross",
+                "city": "Bangalore",
+                "state": "Karnatka",
+                "country": "India",
+                "pinCode": "560068",
+                "active": true
+            }
+}
+
+
+4.http://localhost:8080/quest-web/api/v1.0/ui/user/list
+
+I/P:
+{
+	"pageNo":1,
+	"pageSize":20,
+	"searchKey":"SVN",
+	"active":true
+}
+
+O/P:
+{
+    "status": "success",
+    "object": {
+        "count": 4,
+        "userVoList": [
+            {
+                "userId": 4,
+                "collegeVo": {
+                    "collegeId": 5,
+                    "collegeName": "Science College",
+                    "collegeCode": "SCIENC0000000005",
+                    "addressLine1": "Gandhi Maidan",
+                    "addressLine2": "Ashok Rajpath",
+                    "city": "PATNA",
+                    "state": "Bihar",
+                    "country": "India",
+                    "pinCode": "800011",
+                    "active": true
+                },
+                "specializationVo": {
+                    "specializationId": 1,
+                    "specializationName": "CS",
+                    "specializationCode": null,
+                    "active": true
+                },
+                "firstName": "Ravi",
+                "middleName": "",
+                "lastName": "Ranjan",
+                "gender": "MALE",
+                "dateOfBirth": 1537628000,
+                "contactEmail": "ravi.ranjan@gmail.com",
+                "password": null,
+                "contactNumber": "24324234",
+                "adhaarNumber": "36638nihdjsk",
+                "tenthPercentage": "70",
+                "addressLine1": "NGR Layout",
+                "addressLine2": "4th cross",
+                "city": "Bangalore",
+                "state": "Karnatka",
+                "country": "India",
+                "pinCode": "560068",
+                "active": true
+            },
+            {
+                "userId": 3,
+                "collegeVo": {
+                    "collegeId": 1,
+                    "collegeName": "SVN College",
+                    "collegeCode": "SVN CO0000000001",
+                    "addressLine1": "Yehlanka",
+                    "addressLine2": "Airport Road",
+                    "city": "Bangalore",
+                    "state": "Karnatka",
+                    "country": "India",
+                    "pinCode": "560001",
+                    "active": true
+                },
+                "specializationVo": {
+                    "specializationId": 1,
+                    "specializationName": "CS",
+                    "specializationCode": null,
+                    "active": true
+                },
+                "firstName": "Vikas",
+                "middleName": "",
+                "lastName": "Pawale",
+                "gender": "MALE",
+                "dateOfBirth": 1537628000,
+                "contactEmail": "vikaspawale.v@gmail.com",
+                "password": null,
+                "contactNumber": "678876567",
+                "adhaarNumber": "36638nihdjsk",
+                "tenthPercentage": "70",
+                "addressLine1": "NGR Layout",
+                "addressLine2": "4th cross",
+                "city": "Bangalore",
+                "state": "Karnatka",
+                "country": "India",
+                "pinCode": "560068",
+                "active": true
+            },
+            {
+                "userId": 2,
+                "collegeVo": {
+                    "collegeId": 2,
+                    "collegeName": "SRM College",
+                    "collegeCode": "SRM CO0000000002",
+                    "addressLine1": "CITY Collony",
+                    "addressLine2": "Airport Road",
+                    "city": "Chennai",
+                    "state": "Tamilnadu",
+                    "country": "India",
+                    "pinCode": "465908",
+                    "active": true
+                },
+                "specializationVo": {
+                    "specializationId": 2,
+                    "specializationName": "EC",
+                    "specializationCode": null,
+                    "active": true
+                },
+                "firstName": "Priyanka",
+                "middleName": "Kumar",
+                "lastName": "Singh",
+                "gender": "FEMALE",
+                "dateOfBirth": 1537628000,
+                "contactEmail": "aanya542@gmail.com",
+                "password": null,
+                "contactNumber": "7903833413",
+                "adhaarNumber": "36638nihdjsk",
+                "tenthPercentage": "57",
+                "addressLine1": "Boring Road",
+                "addressLine2": "An College",
+                "city": "Patna",
+                "state": "Bihar",
+                "country": "India",
+                "pinCode": "800002",
+                "active": true
+            },
+            {
+                "userId": 1,
+                "collegeVo": {
+                    "collegeId": 3,
+                    "collegeName": "CRM College",
+                    "collegeCode": "CRM CO0000000003",
+                    "addressLine1": "Malai Nagar",
+                    "addressLine2": "Airport Road",
+                    "city": "Chennai",
+                    "state": "Tamilnadu",
+                    "country": "India",
+                    "pinCode": "465908",
+                    "active": true
+                },
+                "specializationVo": {
+                    "specializationId": 1,
+                    "specializationName": "CS",
+                    "specializationCode": null,
+                    "active": true
+                },
+                "firstName": "Satyendra",
+                "middleName": "Kumar",
+                "lastName": "Singh",
+                "gender": "MALE",
+                "dateOfBirth": 1537628000,
+                "contactEmail": "sngh542@gmail.com",
+                "password": null,
+                "contactNumber": "8880863315",
+                "adhaarNumber": "36638nihdjk",
+                "tenthPercentage": "57",
+                "addressLine1": "NGR LAYOUT",
+                "addressLine2": "4th Cross",
+                "city": "Bangalore",
+                "state": "Karnatka",
+                "country": "India",
+                "pinCode": "560068",
+                "active": true
+            }
+        ]
+    }
+}
+5.http://localhost:8080/quest-web/api/v1.0/ui/user/login
+
+I/P:
+{
+	"userName":"sngh542@gmail.com",
+	"password":"welcome123"
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+                "userId": 4,
+                "collegeVo": {
+                    "collegeId": 5,
+                    "collegeName": "Science College",
+                    "collegeCode": "SCIENC0000000005",
+                    "addressLine1": "Gandhi Maidan",
+                    "addressLine2": "Ashok Rajpath",
+                    "city": "PATNA",
+                    "state": "Bihar",
+                    "country": "India",
+                    "pinCode": "800011",
+                    "active": true
+                },
+                "specializationVo": {
+                    "specializationId": 1,
+                    "specializationName": "CS",
+                    "specializationCode": null,
+                    "active": true
+                },
+                "firstName": "Ravi",
+                "middleName": "",
+                "lastName": "Ranjan",
+                "gender": "MALE",
+                "dateOfBirth": 1537628000,
+                "contactEmail": "ravi.ranjan@gmail.com",
+                "password": null,
+                "contactNumber": "24324234",
+                "adhaarNumber": "36638nihdjsk",
+                "tenthPercentage": "70",
+                "addressLine1": "NGR Layout",
+                "addressLine2": "4th cross",
+                "city": "Bangalore",
+                "state": "Karnatka",
+                "country": "India",
+                "pinCode": "560068",
+                "active": true
+            }
+}
+
+
+
+	UserAdmin
+
+
+1. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor/create
+
+I/P:
+{	"collegeVo":{
+	"collegeId":3
+	},
+	"firstName":"Vikas",
+	"lastName":"Babu",
+	"contactEmail":"vikasv@gmail.com",
+	"password":"welcome@123"
+}
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+
+2. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor/update
+
+I/P:
+{
+		"collegeVo":{
+	"collegeId":3
+	},
+	"testConductorId":3,
+	"firstName":"Vikas",
+	"lastName":"Babu",
+	"contactEmail":"vikasv@gmail.com",
+	"password":"welcome@123",
+	"active":true
+}
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+3. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor/read
+I/P:
+{
+	"testConductorId":3
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "testConductorId": 3,
+        "collegeVo": {
+            "collegeId": 3,
+            "collegeName": "CRM College",
+            "collegeCode": "CRM CO0000000003",
+            "addressLine1": "Malai Nagar",
+            "addressLine2": "Airport Road",
+            "city": "Chennai",
+            "state": "Tamilnadu",
+            "country": "India",
+            "pinCode": "465908",
+            "active": true
+        },
+        "firstName": "Ravi",
+        "lastName": "Ranjan",
+        "contactEmail": "ravi.ranjan@gmail.com",
+        "password": null,
+        "adminType": "TestConductor",
+        "active": true
+    }
+}
+
+4.http://localhost:8080/quest-web/api/v1.0/ui/test-conductor/list
+
+I/P:
+{
+	"pageNo":1,
+	"pageSize":20,
+	"searchKey":"SVN",
+	"active":true
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "testConductorVoList": [
+            {
+                "testConductorId": 4,
+                "collegeVo": {
+                    "collegeId": 1,
+                    "collegeName": "SVN College",
+                    "collegeCode": "SVN CO0000000001",
+                    "addressLine1": "Yehlanka",
+                    "addressLine2": "Airport Road",
+                    "city": "Bangalore",
+                    "state": "Karnatka",
+                    "country": "India",
+                    "pinCode": "560001",
+                    "active": true
+                },
+                "firstName": "Pramod",
+                "lastName": "s",
+                "contactEmail": "Parmod@gmail.com",
+                "password": null,
+                "adminType": "TestConductor",
+                "active": true
+            },
+            {
+                "testConductorId": 3,
+                "collegeVo": {
+                    "collegeId": 3,
+                    "collegeName": "CRM College",
+                    "collegeCode": "CRM CO0000000003",
+                    "addressLine1": "Malai Nagar",
+                    "addressLine2": "Airport Road",
+                    "city": "Chennai",
+                    "state": "Tamilnadu",
+                    "country": "India",
+                    "pinCode": "465908",
+                    "active": true
+                },
+                "firstName": "Ravi",
+                "lastName": "Ranjan",
+                "contactEmail": "ravi.ranjan@gmail.com",
+                "password": null,
+                "adminType": "TestConductor",
+                "active": true
+            },
+            {
+                "testConductorId": 2,
+                "collegeVo": {
+                    "collegeId": 2,
+                    "collegeName": "SRM College",
+                    "collegeCode": "SRM CO0000000002",
+                    "addressLine1": "CITY Collony",
+                    "addressLine2": "Airport Road",
+                    "city": "Chennai",
+                    "state": "Tamilnadu",
+                    "country": "India",
+                    "pinCode": "465908",
+                    "active": true
+                },
+                "firstName": "Satyendra",
+                "lastName": "Singh",
+                "contactEmail": "sngh542@gmail.com",
+                "password": null,
+                "adminType": "TestConductor",
+                "active": true
+            },
+            {
+                "testConductorId": 1,
+                "collegeVo": {
+                    "collegeId": 2,
+                    "collegeName": "SRM College",
+                    "collegeCode": "SRM CO0000000002",
+                    "addressLine1": "CITY Collony",
+                    "addressLine2": "Airport Road",
+                    "city": "Chennai",
+                    "state": "Tamilnadu",
+                    "country": "India",
+                    "pinCode": "465908",
+                    "active": true
+                },
+                "firstName": "Vikas",
+                "lastName": "Babu",
+                "contactEmail": "vikasv@gmail.com",
+                "password": null,
+                "adminType": "TestConductor",
+                "active": true
+            }
+        ],
+        "count": 4
+    }
+}
+5.http://localhost:8080/quest-web/api/v1.0/ui/test-conductor/login
+
+I/P:
+{
+	"userName":"sngh542@gmail.com",
+	"password":"welcome123"
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "testConductorId": 3,
+        "collegeVo": {
+            "collegeId": 3,
+            "collegeName": "CRM College",
+            "collegeCode": "CRM CO0000000003",
+            "addressLine1": "Malai Nagar",
+            "addressLine2": "Airport Road",
+            "city": "Chennai",
+            "state": "Tamilnadu",
+            "country": "India",
+            "pinCode": "465908",
+            "active": true
+        },
+        "firstName": "Ravi",
+        "lastName": "Ranjan",
+        "contactEmail": "ravi.ranjan@gmail.com",
+        "password": null,
+        "adminType": "TestConductor",
+        "active": true
+    }
+}
+
+Permission
+
+1. http://localhost:8080/quest-web/api/v1.0/ui/permission/create
+
+I/P:
+{
+	"permissionName":""
+}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+
+2. http://localhost:8080/quest-web/api/v1.0/ui/permission/update
+
+I/P:
+{
+	"permissionId":1,
+	"permissionName":"",
+	"active":true
+}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+3. http://localhost:8080/quest-web/api/v1.0/ui/permission/read
+I/P:
+{
+	"permissionId":1
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+	"permissionId":1,
+	"permissionName":"",
+	"active":true
+}
+
+}
+
+
+
+4.http://localhost:8080/quest-web/api/v1.0/ui/permission/list
+
+I/P:
+{
+	"pageNo":1,
+	"pageSize":20,
+	"searchKey":"SVN",
+	"active":true
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "count": 1,
+        "permissionVoList": [
+            {
+	"permissionId":1,
+	"permissionName":"",
+	"active":true
+}        ]
+    }
+}
+
+
+
+
+TestConductorHasPermission
+
+1. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-permission/create
+
+I/P:
+{
+"permissionId":1,
+"testConductorId":1
+}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+
+2. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-permission/update
+
+I/P:
+{
+	"permissionId":1,
+	"testConductorId":1,
+	"active":true
+}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+3. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-permission/read
+I/P:
+{
+	"testConductorHasPermissionId":4
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object":  {
+            "testConductorHasPermissionId": 4,
+            "permissionId": 3,
+            "permissionName": "Test Conductor",
+            "testConductorId": 2,
+            "active": true
+        }
+}
+
+
+
+4.http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-permission/list
+
+I/P:
+{
+	
+	"testConductorId":1,
+	"active":true
+}
+
+O/P:
+
+{
+    "list": [
+        {
+            "testConductorHasPermissionId": 4,
+            "permissionId": 3,
+            "permissionName": "Test Conductor",
+            "testConductorId": 2,
+            "active": true
+        },
+        {
+            "testConductorHasPermissionId": 3,
+            "permissionId": 2,
+            "permissionName": "SUPER ADMIN",
+            "testConductorId": 2,
+            "active": true
+        },
+        {
+            "testConductorHasPermissionId": 2,
+            "permissionId": 1,
+            "permissionName": "ADMIN",
+            "testConductorId": 2,
+            "active": true
+        }
+    ],
+    "status": "success"
+}
+
+5. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-permission/create-batch
+
+I/P:
+
+{
+	"permissionIdList":[1,2,3,4],
+	"testConductorId":1,
+	"active":true
+}
+
+
+O/P:
+{
+    "status": "success",
+    "object": [
+        2,
+        3,
+        4
+    ]
+}
+
+
+
+
+ExamCategory
+
+1. http://localhost:8080/quest-web/api/v1.0/ui/exam-category/create
+
+I/P:
+{
+"examCategoryName":"CAT"
+}
+
+or,
+
+{
+"examCategoryId":3,
+"examCategoryName":"BANKING",
+"examSubCategoryName":"PO"
+}
+
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+
+2. http://localhost:8080/quest-web/api/v1.0/ui/exam-category/update
+
+I/P:
+{
+"examCategoryId":1,
+"examCategoryName":"CAT",
+"examSubCategoryName":"CAT/ET",
+"examSubCategoryId":4,
+"active":true
+}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+3. http://localhost:8080/quest-web/api/v1.0/ui/exam-category/read
+I/P:
+{
+	"examCategoryId":4
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "examCategoryId": 3,
+        "examCategoryName": "BANKING",
+        "examSubCategoryId": 7,
+        "examSubCategoryName": "PO",
+        "active": true
+    }
+}
+
+
+4.http://localhost:8080/quest-web/api/v1.0/ui/exam-category/list
+
+I/P:
+{
+	
+	"pageNo":1,
+	"pageSize":10,
+	"active":true
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "count": 3,
+        "examCategoryVoList": [
+            {
+                "examCategoryId": 3,
+                "examCategoryName": "Banking",
+                "examSubCategoryId": null,
+                "examSubCategoryName": null,
+                "active": true
+            },
+            {
+                "examCategoryId": 2,
+                "examCategoryName": "MAT",
+                "examSubCategoryId": null,
+                "examSubCategoryName": null,
+                "active": true
+            },
+            {
+                "examCategoryId": 1,
+                "examCategoryName": "CAT",
+                "examSubCategoryId": null,
+                "examSubCategoryName": null,
+                "active": true
+            }
+        ]
+    }
+}
+5. http://localhost:8080/quest-web/api/v1.0/ui/exam-category/sub-category-list
+
+I/P:
+
+{
+	
+	"pageNo":1,
+	"pageSize":10,
+	"active":true
+}
+
+O/P:
+{
+    "status": "success",
+    "object": {
+        "count": 4,
+        "examCategoryVoList": [
+            {
+                "examCategoryId": 3,
+                "examCategoryName": "BANKING",
+                "examSubCategoryId": 7,
+                "examSubCategoryName": "PO",
+                "active": true
+            },
+            {
+                "examCategoryId": 3,
+                "examCategoryName": "BANKING",
+                "examSubCategoryId": 6,
+                "examSubCategoryName": "Clerk",
+                "active": true
+            },
+            {
+                "examCategoryId": 2,
+                "examCategoryName": "MAT",
+                "examSubCategoryId": 5,
+                "examSubCategoryName": "MAt/MB",
+                "active": true
+            },
+            {
+                "examCategoryId": 1,
+                "examCategoryName": "CAT",
+                "examSubCategoryId": 4,
+                "examSubCategoryName": "CAT/ET",
+                "active": true
+            }
+        ]
+    }
+}
+
+6. http://localhost:8080/quest-web/api/v1.0/ui/exam-category/list-by-category-id
+I/P:
+{
+	"examCategoryId":3
+}
+
+O/P:
+
+{
+    "list": [
+        {
+            "examCategoryId": 3,
+            "examCategoryName": "BANKING",
+            "examSubCategoryId": 7,
+            "examSubCategoryName": "PO",
+            "active": true
+        },
+        {
+            "examCategoryId": 3,
+            "examCategoryName": "BANKING",
+            "examSubCategoryId": 6,
+            "examSubCategoryName": "Clerk",
+            "active": true
+        }
+    ],
+    "status": "success"
+}
+
+
+QuestionCategory
+
+1. http://localhost:8080/quest-web/api/v1.0/ui/question-category/create
+
+I/P:
+{
+"questionCategoryName":"English"
+}
+
+or,
+
+{
+"questionCategoryId":2,
+"questionCategoryName":"Aptitude",
+"questionSubCategoryName":"Number Sytsem"
+}
+
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+
+2. http://localhost:8080/quest-web/api/v1.0/ui/question-category/update
+
+I/P:
+{
+"questionCategoryId":1,
+"questionCategoryName":"English",
+"questionSubCategoryName":"Antonym",
+"questionSubCategoryId":5,
+"active":true
+}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+3. http://localhost:8080/quest-web/api/v1.0/ui/question-category/read
+I/P:
+{
+	"questionCategoryId":7
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "questionCategoryId": 3,
+        "questionCategoryName": "English",
+        "questionSubCategoryId": 7,
+        "questionSubCategoryName": "Phrasel Verb",
+        "active": true
+    }
+}
+
+
+4.http://localhost:8080/quest-web/api/v1.0/ui/question-category/list
+
+I/P:
+{
+	
+	"pageNo":1,
+	"pageSize":10,
+	"active":true
+}
+
+O/P:
+{
+    "status": "success",
+    "object": {
+        "questionCategoryVoList": [
+            {
+                "questionCategoryId": 4,
+                "questionCategoryName": "Computer Science",
+                "questionSubCategoryId": null,
+                "questionSubCategoryName": null,
+                "active": true
+            },
+            {
+                "questionCategoryId": 3,
+                "questionCategoryName": "Aptitude",
+                "questionSubCategoryId": null,
+                "questionSubCategoryName": null,
+                "active": true
+            },
+            {
+                "questionCategoryId": 2,
+                "questionCategoryName": "Reasoning",
+                "questionSubCategoryId": null,
+                "questionSubCategoryName": null,
+                "active": true
+            },
+            {
+                "questionCategoryId": 1,
+                "questionCategoryName": "English",
+                "questionSubCategoryId": null,
+                "questionSubCategoryName": null,
+                "active": true
+            }
+        ],
+        "count": 4
+    }
+}
+
+5. http://localhost:8080/quest-web/api/v1.0/ui/question-category/sub-category-list
+
+I/P:
+
+{
+	
+	"pageNo":1,
+	"pageSize":10,
+	"active":true
+}
+
+O/P:
+{
+    "status": "success",
+    "object": {
+        "questionCategoryVoList": [
+            {
+                "questionCategoryId": 2,
+                "questionCategoryName": "Aptitude",
+                "questionSubCategoryId": 9,
+                "questionSubCategoryName": "Number Sytsem",
+                "active": true
+            },
+            {
+                "questionCategoryId": 1,
+                "questionCategoryName": "English",
+                "questionSubCategoryId": 8,
+                "questionSubCategoryName": "Synonym",
+                "active": true
+            },
+            {
+                "questionCategoryId": 1,
+                "questionCategoryName": "English",
+                "questionSubCategoryId": 7,
+                "questionSubCategoryName": "Antonym",
+                "active": true
+            },
+            {
+                "questionCategoryId": 1,
+                "questionCategoryName": "English",
+                "questionSubCategoryId": 6,
+                "questionSubCategoryName": "Phrase",
+                "active": true
+            },
+            {
+                "questionCategoryId": 1,
+                "questionCategoryName": "English",
+                "questionSubCategoryId": 5,
+                "questionSubCategoryName": "Preposition",
+                "active": true
+            }
+        ],
+        "count": 5
+    }
+}
+6. http://localhost:8080/quest-web/api/v1.0/ui/question-category/list-by-category-id
+I/P:
+{
+	"questionCategoryId":3
+}
+
+O/P:
+
+{
+    "list": [
+        {
+            "questionCategoryId": 3,
+            "questionCategoryName": "English",
+            "questionSubCategoryId": 8,
+            "questionSubCategoryName": "Synonym",
+            "active": true
+        },
+        {
+            "questionCategoryId": 3,
+            "questionCategoryName": "English",
+            "questionSubCategoryId": 7,
+            "questionSubCategoryName": "Antonym",
+            "active": true
+        },
+        {
+            "questionCategoryId": 3,
+            "questionCategoryName": "English",
+            "questionSubCategoryId": 6,
+            "questionSubCategoryName": "Phrase",
+            "active": true
+        },
+        {
+            "questionCategoryId": 3,
+            "questionCategoryName": "English",
+            "questionSubCategoryId": 5,
+            "questionSubCategoryName": "Preposition",
+            "active": true
+        }
+    ],
+    "status": "success"
+}
+
+
+
+
+Exam
+
+1. http://localhost:8080/quest-web/api/v1.0/ui/exam/create
+
+I/P:
+{
+"examId":1,
+"examName":"CAT",
+"examDescription":"CAT Mumbai",
+"startDate":1539409892410,
+"endDate":1539409892410,
+"sectionCount":4,
+"questionCount":50,
+"durationInSeconds":3000,
+"duration":50,
+"totalMarks":200,
+"status":false,
+"examType":"CAT",
+"allowReattempts":2,
+"passingPercentage":50,
+"negativeMarking":4,
+"active":true,
+"examCategoryVo":{
+    "examCategoryId": 1,
+                "examCategoryName": "CAT",
+                "examSubCategoryId": 4,
+                "examSubCategoryName": "CAT/ET",
+                "active": true
+            
+}
+	}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+
+2. http://localhost:8080/quest-web/api/v1.0/ui/exam/update
+
+I/P:
+{
+"examId":1,
+"examName":"CAT",
+"examDescription":"CAT Mumbai",
+"startDate":1539409892410,
+"endDate":1539409892410,
+"sectionCount":4,
+"questionCount":50,
+"durationInSeconds":3000,
+"duration":50,
+"totalMarks":200,
+"status":false,
+"examType":"CAT",
+"allowReattempts":2,
+"passingPercentage":50,
+"negativeMarking":4,
+"active":true,
+"examCategoryVo":{
+    "examCategoryId": 1,
+                "examCategoryName": "CAT",
+                "examSubCategoryId": 4,
+                "examSubCategoryName": "CAT/ET",
+                "active": true
+            
+}
+	}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+3. http://localhost:8080/quest-web/api/v1.0/ui/exam/read
+I/P:
+{
+	"examId":1
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "examId": 1,
+        "examName": "CAT",
+        "examDescription": "CAT Mumbai",
+        "startDate": 1539409892000,
+        "endDate": 1539409892000,
+        "sectionCount": 4,
+        "questionCount": 50,
+        "durationInSeconds": 3000,
+        "duration": 50,
+        "totalMarks": 200,
+        "testCode": null,
+        "examType": "CAT",
+        "status": false,
+        "examCategoryVo": {
+            "examCategoryId": 1,
+            "examCategoryName": "CAT",
+            "examSubCategoryId": null,
+            "examSubCategoryName": null,
+            "active": true
+        },
+        "allowReattempts": true,
+        "passingPercentage": 50,
+        "negativeMarking": 4,
+        "active": true
+    }
+}
+
+4.http://localhost:8080/quest-web/api/v1.0/ui/exam/list
+
+
+I/P:
+{
+	"pageNo":1,
+	"pageSize":20,
+	"searchKey":"CAT",
+	"active":true
+}
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "examVoList": [
+            {
+                "examId": 2,
+                "examName": "SBI PO",
+                "examDescription": "SBI PO",
+                "startDate": 1539409892000,
+                "endDate": 1539409892000,
+                "sectionCount": 4,
+                "questionCount": 50,
+                "durationInSeconds": 3000,
+                "duration": 50,
+                "totalMarks": 200,
+                "testCode": null,
+                "examType": "MAT",
+                "status": false,
+                "examCategoryVo": {
+                    "examCategoryId": 3,
+                    "examCategoryName": "Banking",
+                    "examSubCategoryId": null,
+                    "examSubCategoryName": null,
+                    "active": true
+                },
+                "allowReattempts": true,
+                "passingPercentage": 50,
+                "negativeMarking": 4,
+                "active": true
+            },
+            {
+                "examId": 1,
+                "examName": "CAT",
+                "examDescription": "CAT Mumbai",
+                "startDate": 1539409892000,
+                "endDate": 1539409892000,
+                "sectionCount": 4,
+                "questionCount": 50,
+                "durationInSeconds": 3000,
+                "duration": 50,
+                "totalMarks": 200,
+                "testCode": null,
+                "examType": "CAT",
+                "status": false,
+                "examCategoryVo": {
+                    "examCategoryId": 1,
+                    "examCategoryName": "CAT",
+                    "examSubCategoryId": null,
+                    "examSubCategoryName": null,
+                    "active": true
+                },
+                "allowReattempts": true,
+                "passingPercentage": 50,
+                "negativeMarking": 4,
+                "active": true
+            }
+        ],
+        "count": 2
+    }
+}
+
+
+ExamSection
+
+1. http://localhost:8080/quest-web/api/v1.0/ui/exam-section/create
+
+I/P:
+{
+		"examSectionId":1,
+                "examVo":{
+		"examId":1
+		} ,
+                "examSectionName": "Aptitude",
+                "examSectionDescription": "Apti CAT Mumbai",
+                "sequence": 1,
+                "duration": 15,
+                "durationInSeconds": 900,
+                "totalMarks": 50,
+                "totalQuestion": 15,
+		"active":true
+
+}
+	
+	
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+
+2. http://localhost:8080/quest-web/api/v1.0/ui/exam-section/update
+
+I/P:
+{
+		"examSectionId":1,
+                "examVo":{
+		"examId":1
+		} ,
+                "examSectionName": "Aptitude",
+                "examSectionDescription": "Apti CAT Mumbai",
+                "sequence": 1,
+                "duration": 15,
+                "durationInSeconds": 900,
+                "totalMarks": 50,
+                "totalQuestion": 15,
+		"active":true
+
+}
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+3. http://localhost:8080/quest-web/api/v1.0/ui/exam-section/read
+I/P:
+{
+	"examSectionId":1
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "examSectionId": 3,
+        "examVo": {
+            "examId": 1
+ },
+        "examSectionName": "Reasoning",
+        "examSectionDescription": "Reasoning CAT Mumbai",
+        "sequence": 3,
+        "duration": 15,
+        "durationInSeconds": 900,
+        "totalMarks": 50,
+        "totalQuestion": 15,
+        "active": true
+    }
+}
+
+4.http://localhost:8080/quest-web/api/v1.0/ui/exam-section/list-exam-id
+
+I/P:
+{
+	"examId":1
+}
+O/P:
+
+{
+    "list": [
+        {
+            "examSectionId": 1,
+            "examVo": {
+                "examId": 1
+            },
+            "examSectionName": "Aptitude",
+            "examSectionDescription": "Apti CAT Mumbai",
+            "sequence": 1,
+            "duration": 15,
+            "durationInSeconds": 900,
+            "totalMarks": 50,
+            "totalQuestion": 15,
+            "active": true
+        },
+        {
+            "examSectionId": 2,
+            "examVo": {
+                "examId": 1
+            },
+            "examSectionName": "English",
+            "examSectionDescription": "English CAT Mumbai",
+            "sequence": 2,
+            "duration": 15,
+            "durationInSeconds": 900,
+            "totalMarks": 50,
+            "totalQuestion": 15,
+            "active": true
+        },
+        {
+            "examSectionId": 3,
+            "examVo": {
+                "examId": 1
+            },
+            "examSectionName": "Reasoning",
+            "examSectionDescription": "Reasoning CAT Mumbai",
+            "sequence": 3,
+            "duration": 15,
+            "durationInSeconds": 900,
+            "totalMarks": 50,
+            "totalQuestion": 15,
+            "active": true
+        },
+        {
+            "examSectionId": 4,
+            "examVo": {
+                "examId": 1
+            },
+            "examSectionName": "Computer Science",
+            "examSectionDescription": "Computer Science CAT Mumbai",
+            "sequence": 4,
+            "duration": 15,
+            "durationInSeconds": 900,
+            "totalMarks": 50,
+            "totalQuestion": 5,
+            "active": true
+        }
+    ],
+    "status": "success"
+}
+
+
+
+TestConductorLicence
+
+
+1. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-licence/admin-assign-licens
+
+I/P:
+{
+"examVo":{
+"examId":1
+},
+"testConductorVo":{
+"testConductorId":1
+},
+"licenseCount":50,
+}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+2. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-licence/tc-assign-license
+
+I/P:
+{
+"examVo":{
+"examId":1
+},
+"testConductorVo":{
+"testConductorId":1
+},
+"licenseCount":50,
+}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+2. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-licence/update
+
+I/P:
+{
+"testConductorLicenceId":1,
+"examVo":{
+"examId":1
+},
+"testConductorVo":{
+"testConductorId":1
+},
+"licenseCount":50,
+"remainingLicenseCount":50,
+"active":true
+	}
+
+O/P:
+{
+    "id": 1,
+    "status": "success"
+}
+
+3. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-licence/read
+
+I/P:
+{
+"testConductorLicenceId":1,
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "testConductorLicenceId": 1,
+        "examVo": {
+            "examId": 1
+            },
+        "testConductorVo": {
+            "testConductorId": 1
+        },
+        "licenseCount": 40,
+        "remainingLicenseCount": 40,
+        "active": true
+    }
+}
+
+4. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-licence/list
+
+I/P:
+{
+	"pageNo":1,
+	"pageSize":20,
+	"active":true
+}
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "count": 1,
+        "testConductorLicenceVoList": [
+            {
+                "testConductorLicenceId": 1,
+                "examVo": {
+                    "examId": 1
+                },
+                "testConductorVo": {
+                    "testConductorId": 1
+                },
+                "licenseCount": 40,
+                "remainingLicenseCount": 40,
+                "active": true
+            }
+        ]
+    }
+}
+
+5. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-licence/list-by-tc-id
+
+I/P:
+
+{
+	"testCondutorId":1,
+	"pageNo":1,
+	"pageSize":20
+}
+
+
+O/P:
+
+{
+    "status": "success",
+    "object": {
+        "count": 1,
+        "testConductorLicenceVoList": [
+            {
+                "testConductorLicenceId": 1,
+                "examVo": {
+                    "examId": 1
+                },
+                "testConductorVo": {
+                    "testConductorId": 1
+                },
+                "licenseCount": 40,
+                "remainingLicenseCount": 40,
+                "active": true
+            }
+        ]
+    }
+}
+
+TestConductorTestCode
+
+1. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-test-code/test-code-assign-user
+
+I/P:
+
+{
+"testConductorHasTestCodeIdList":[1,2,3]
+}
+
+1. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-test-code//test-code-deactivate-user
+
+I/P:
+
+{
+"testConductorLicenseId":1,
+"userIdList":[1,2,3]
+}
+
+
+
+2. http://localhost:8080/quest-web/api/v1.0/ui/test-conductor-test-code/list-test-conductor-license-id
+
+I/P:
+{
+"testConductorLicenseId":1,
+}
+
+
+O/P:
+
+{
+    "list": [
+        {
+            "testConductorHasTestCodeId": 1,
+            "testConductorLicenseId": 1,
+            "testCode": "1TC1EC0000000000000000001",
+            "userVo": {
+                "userId": 1,
+                "collegeVo": {
+                    "collegeId": 3,
+                    "collegeName": "CRM College",
+                    "collegeCode": "CRM CO0000000003",
+                    "addressLine1": "Malai Nagar",
+                    "addressLine2": "Airport Road",
+                    "city": "Chennai",
+                    "state": "Tamilnadu",
+                    "country": "India",
+                    "pinCode": "465908",
+                    "active": true
+                },
+                "specializationVo": {
+                    "specializationId": 1,
+                    "specializationName": "CS",
+                    "specializationCode": null,
+                    "active": true
+                },
+                "firstName": "Satyendra",
+                "middleName": "Kumar",
+                "lastName": "Singh",
+                "gender": "MALE",
+                "dateOfBirth": 1537628000,
+                "contactEmail": "sngh542@gmail.com",
+                "password": null,
+                "contactNumber": "8880863315",
+                "adhaarNumber": "36638nihdjk",
+                "tenthPercentage": "57",
+                "addressLine1": "NGR LAYOUT",
+                "addressLine2": "4th Cross",
+                "city": "Bangalore",
+                "state": "Karnatka",
+                "country": "India",
+                "pinCode": "560068",
+                "active": true
+            },
+            "assigned": true,
+            "active": true
+        }
+    ],
+    "status": "success"
+}
+
+
+

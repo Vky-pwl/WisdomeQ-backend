@@ -1,0 +1,13 @@
+/authconfig.properties
+/dmsconfig.properties
+/documentRepoConfig.properties
+/finedocconfig.properties
+/kafkaconfig.properties
+/mailerconfig.properties
+/motorconfig.properties
+/schedulerconfig.properties
+/searchconfig.properties
+/securityconfig.properties
+/smsconfig.properties
+/systemconfig.properties
+/uiwidgetconstants.properties
