@@ -1,4 +1,0 @@
-com/icat/quest/scheduler/service/SimpleJobService.class
-com/icat/quest/scheduler/config/QuartzConfig.class
-com/icat/quest/scheduler/service/impl/ExamQuestionCacheSchedulerJob.class
-com/icat/quest/scheduler/service/impl/ExamStatusSchedulerJob.class
