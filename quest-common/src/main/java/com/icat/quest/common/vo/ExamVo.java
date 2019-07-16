@@ -37,6 +37,7 @@ public class ExamVo implements java.io.Serializable {
 	private byte[] examDescriptionData;
 	private byte[] examInstructionsData;
 	private ExamSettingsVo examSettingsVo;
+	private Integer testConductorHasTestCodeId;
 	
 	public ExamVo() {
 	}
@@ -327,6 +328,16 @@ public class ExamVo implements java.io.Serializable {
 	@JsonProperty("examSettingsVo")
 	public void setExamSettingsVo(ExamSettingsVo examSettingsVo) {
 		this.examSettingsVo = examSettingsVo;
+	}
+
+	
+	
+	public Integer getTestConductorHasTestCodeId() {
+		return testConductorHasTestCodeId;
+	}
+
+	public void setTestConductorHasTestCodeId(Integer testConductorHasTestCodeId) {
+		this.testConductorHasTestCodeId = testConductorHasTestCodeId;
 	}
 
 	@Override

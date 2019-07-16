@@ -50,11 +50,11 @@ public class CandidateCompositeServiceImpl implements CandidateCompositeService 
 				testConductorHasTestCodeService.assignedUserTestCode(userIdList,
 						publishExamLicense.getTestConductorLicense().getTestConductorLicenseId(), userId, false,
 						tinyKey);
-				if (tinyKey == null) {
+				/*if (tinyKey == null) {
 					LOGGER.info("Already Assigned exam");
 					response.put(Constants.STATUS_ERROR, "Already Assigned exam");
 					return response;
-				}
+				}*/
 				response.put(Constants.STATUS_SUCCESS, Constants.STATUS_SUCCESS);
 				response.put("tinyKey", tinyKey);
 				response.put("examId", publishExamLicense.getTestConductorLicense().getExam().getExamId());
@@ -100,11 +100,11 @@ public class CandidateCompositeServiceImpl implements CandidateCompositeService 
 				testConductorHasTestCodeService.assignedUserTestCode(userIdList,
 						publishExamLicense.getTestConductorLicense().getTestConductorLicenseId(), userId, false,
 						tinyKey);
-				if (tinyKey == null) {
+				/*if (tinyKey == null) {
 					LOGGER.info("Already Assigned exam");
 					response.put(Constants.STATUS_ERROR, "Already Assigned exam");
 					return response;
-				}
+				}*/
 				response.put(Constants.STATUS_SUCCESS, Constants.STATUS_SUCCESS);
 				response.put("tinyKey", tinyKey);
 				response.put("examId", publishExamLicense.getTestConductorLicense().getExam().getExamId());

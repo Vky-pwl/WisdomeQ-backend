@@ -59,6 +59,9 @@ public class SkillAssessmentReport {
 			"apply it to the problems and also practice as much as you can";  
 	
 	public static String getSkillAssesstmentSkill(Level techLevel, Level aptiLevel) {
+		if(techLevel == null || aptiLevel == null) {
+			return null;
+		}
 		if(techLevel == Level.HIGH && aptiLevel == Level.HIGH) {
 			return hh;
 		}

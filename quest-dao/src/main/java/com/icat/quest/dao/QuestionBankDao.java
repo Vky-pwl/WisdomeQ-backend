@@ -15,11 +15,13 @@ public interface QuestionBankDao extends GenericDao<QuestionBank,Integer>{
 	public String findAllBySearchKey="from com.icat.quest.model.QuestionBank questionBank where questionBank.questionStatment like :_2_questionBankName order by questionBank.questionId desc";
 	public String findAll = "from com.icat.quest.model.QuestionBank questionBank order by questionBank.questionId desc";
 	
-	public String findByFilterCriteria = "select distinct questionId from QuestionBank Q, QuestionCategory QC\n" + 
-			" where\n" + 
-			" (case when :_1_QuestionSubCategoryId is null then 1=1 else QC.QuestionCategoryId=:_1_QuestionSubCategoryId end) and\n" + 
-			" (case when :_2_QuestionCategoryId is null then 1=1 else QC.parentQuestionCategoryId=:_2_QuestionCategoryId end) and \n" +
-			" (case when :_4_questionExamType is null then 1=1 else Q.questionExamType=:_4_questionExamType end) and \n" +
-			" (case when :_3_searchKey is null then 1=1 else UPPER(cast(Q.questionStatment as char)) like UPPER(:_3_searchKey) end)" ;
+	public String findByFilterCriteria = "SELECT DISTINCT questionId FROM QuestionBank Q, QuestionCategory QC" + 
+			" WHERE Q.questionCategoryId = QC.questionCategoryId " + 
+			"AND (CASE WHEN :_1_QuestionSubCategoryId IS NULL THEN 1=1 ELSE (QC.questionCategoryId=:_1_QuestionSubCategoryId AND QC.parentQuestionCategoryId IS NOT NULL) END) " + 
+			"AND (CASE WHEN :_2_QuestionCategoryId IS NULL THEN 1=1 ELSE QC.parentQuestionCategoryId=:_2_QuestionCategoryId END) " +
+			"AND (CASE WHEN :_4_questionExamType IS NULL THEN 1=1 ELSE Q.questionExamType=:_4_questionExamType END) " +
+			"AND (CASE WHEN :_3_searchKey IS NULL THEN 1=1 ELSE UPPER(CAST(Q.questionStatment AS CHAR)) LIKE UPPER(:_3_searchKey) END) "+
+			"ORDER BY Q.questionId DESC" ;
+	
 		
 }

@@ -35,6 +35,7 @@ public class CandidateResultVo implements Serializable{
     private Level quantitativeLevel;
     private Float technicalPercentile;
     private float quantitativePercentile;
+    private Integer testConductorHasTestCodeId;
     
 	public CandidateResultVo() {
 		super();
@@ -285,6 +286,16 @@ public class CandidateResultVo implements Serializable{
 		this.quantitativePercentile = quantitativePercentile;
 	}
 	
+	
+	
+	public Integer getTestConductorHasTestCodeId() {
+		return testConductorHasTestCodeId;
+	}
+
+	public void setTestConductorHasTestCodeId(Integer testConductorHasTestCodeId) {
+		this.testConductorHasTestCodeId = testConductorHasTestCodeId;
+	}
+
 	public void calculateCandidateResult() {
 		if (sectionResultList != null) {
 			Iterator<SectionResultVo> it = sectionResultList.iterator();

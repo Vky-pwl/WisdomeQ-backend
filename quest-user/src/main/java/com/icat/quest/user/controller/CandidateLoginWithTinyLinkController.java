@@ -17,7 +17,6 @@ import com.icat.quest.common.utils.Constants;
 import com.icat.quest.common.utils.ResponseBuilder;
 import com.icat.quest.common.vo.CandidateVo;
 import com.icat.quest.dao.user.service.CandidateService;
-import com.icat.quest.dao.user.service.TestConductorHasTestCodeUserService;
 import com.icat.quest.service.TestConductorHasTestCodeService;
 import com.icat.quest.user.service.CandidateCompositeService;
 import com.icat.quest.user.service.CandidateLoginDetailService;

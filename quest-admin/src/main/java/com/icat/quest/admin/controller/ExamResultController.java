@@ -279,7 +279,7 @@ public class ExamResultController {
 				isEligble = userHasPermissionService.isPermission(principalVo.getUserId(), examId,
 						principalVo.getUserType(), 1);
 				if (!isEligble && principalVo.getCollegeId() != null) {
-					isEligble = userHasPermissionService.isPermissionTemp(principalVo.getCollegeId(), testConductorHasTestCodeId, 1);
+					isEligble = userHasPermissionService.isPermissionTemp(principalVo.getCollegeId(), examId, 1);
 				}
 				if (!isEligble) {
 					return new ResponseBuilder(false).status(ResponseBuilder.Status.error)

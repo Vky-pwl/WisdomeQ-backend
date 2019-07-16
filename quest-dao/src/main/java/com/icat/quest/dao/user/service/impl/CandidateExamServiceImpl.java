@@ -174,6 +174,7 @@ public class CandidateExamServiceImpl implements CandidateExamService {
 				examVo.setTinyKey(testConductorHasTestCode.getTinyKey());
 				examVo.setSectionRemainingTime(testConductorHasTestCode.getSectionRemainingTime());
 				examVo.setCurrentSectionId(testConductorHasTestCode.getCurrentSectionId());
+				examVo.setTestConductorHasTestCodeId(testConductorHasTestCode.getTestConductorHasTestCodeId());
 				examVoList.add(examVo);
 			});
 		}

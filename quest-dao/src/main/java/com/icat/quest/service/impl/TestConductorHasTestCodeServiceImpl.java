@@ -136,21 +136,21 @@ public class TestConductorHasTestCodeServiceImpl implements TestConductorHasTest
 			}
 		}
 		testConductorHasTestCodeDao.createBatch(testConductorHasTestCodes);
-		
-		testConductorHasTestCodes.forEach(testConductorHasTestCode -> {
+		for(TestConductorHasTestCode testConductorHasTestCode: testConductorHasTestCodes) {
+			tinyKey = tinyLinkService.shortenURL(testConductorHasTestCode.getTestConductorHasTestCodeId(),
+					userId, exam.getStartDate() != null ? exam.getStartDate().getTime() : null);
+			testConductorHasTestCode.setTinyKey(tinyKey);
 			testConductorHasTestCode.setTestCode(
 					UniqueCodeGeneratorImpl.getExamCode(testConductorLicense.getTestConductorLicenseId() + "",examId + "", testConductorHasTestCode.getTestConductorHasTestCodeId() + ""));
-			testConductorHasTestCode.setTinyKey(tinyLinkService.shortenURL(testConductorHasTestCode.getTestConductorHasTestCodeId(),
-							userId, exam.getStartDate() != null ? exam.getStartDate().getTime() : null));
-
-		});
-
+			
+		}
+		
 		if (testConductorHasTestCodes.size() > 0) {
-			tinyKey = testConductorHasTestCodes.get(0).getTinyKey();
 			testConductorHasTestCodeDao.updateBatch(testConductorHasTestCodes);
-
+			
 			testConductorLicense
 					.setRemainingLicenseCount(testConductorLicense.getRemainingLicenseCount() - userIdList.size());
+			
 			testConductorLicenseDao.update(testConductorLicense);
 		}
 		

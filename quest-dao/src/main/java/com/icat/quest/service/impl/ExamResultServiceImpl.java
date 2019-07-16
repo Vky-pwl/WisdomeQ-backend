@@ -416,8 +416,8 @@ public class ExamResultServiceImpl implements ExamResultService {
 		String summary = SkillAssessmentReport.getSkillAssesstmentSkill(candidateResultVo.getTechnicalLevel(),
 				candidateResultVo.getQuantitativeLevel());
 		Map<String, String> resultSummary = new HashMap<>();
-		resultSummary.put("quantativeLevel", candidateResultVo.getQuantitativeLevel().name());
-		resultSummary.put("technicalLevel", candidateResultVo.getTechnicalLevel().name());
+		resultSummary.put("quantativeLevel", candidateResultVo.getQuantitativeLevel() != null ? candidateResultVo.getQuantitativeLevel().name() : null );
+		resultSummary.put("technicalLevel", candidateResultVo.getTechnicalLevel() != null ? candidateResultVo.getTechnicalLevel().name() : null);
 		resultSummary.put("summary", summary);
 		return resultSummary;
 	}
@@ -502,6 +502,7 @@ public class ExamResultServiceImpl implements ExamResultService {
 							mapCandExamDescList.get(testConductorHasTestCodeId));
 					UserMarksVo userMarksVo = mapUserMarksVo.get(testConductorHasTestCodeId);
 					candidateResultVo.setRank(userMarksVo.getRank());
+					candidateResultVo.setTestConductorHasTestCodeId(testConductorHasTestCodeId);
 					candidateResultVos.add(candidateResultVo);
 				}
 			}
@@ -578,8 +579,9 @@ public class ExamResultServiceImpl implements ExamResultService {
 		List<CandidateResultVo> candidateResultVoList = new ArrayList<>();
 
 		for (Integer tchtcId : mapExamResultList.keySet()) {
-			candidateResultVoList
-					.add(transformCandidateResult(mapExamResultList.get(tchtcId), mapCandidate, mapQuestionCategory));
+			CandidateResultVo candidateResultVo = transformCandidateResult(mapExamResultList.get(tchtcId), mapCandidate, mapQuestionCategory);
+			candidateResultVo.setTestConductorHasTestCodeId(tchtcId);
+			candidateResultVoList.add(candidateResultVo);
 		}
 
 		candidateResultVoList

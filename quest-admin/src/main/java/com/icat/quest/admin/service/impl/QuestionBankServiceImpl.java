@@ -157,6 +157,40 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 		return Transformer.QUESTION_BANK_TRANSFORMER.transform(questionBank);
 	}
 
+	private String customizeQueryBuilder(String query, Integer questionCategoryId, Integer questionSubCategoryId, Integer questionExamType, String searchKey) {
+		Boolean isWhereFlag = false;
+		if(questionCategoryId != null) {
+			isWhereFlag = true;
+		query = query.concat(" WHERE QC.QuestionCategoryId=:_2_QuestionCategoryId AND QC.parentQuestionCategoryId is null ");
+		}
+		if(questionSubCategoryId != null) {
+			isWhereFlag = true;
+			if(isWhereFlag) {
+			query = query.concat(" AND QC.QuestionCategoryId=:_1_QuestionSubCategoryId AND QC.parentQuestionCategoryId is not null ");
+			} else {
+				query = query.concat(" WHERE QC.QuestionCategoryId=:_1_QuestionSubCategoryId AND QC.parentQuestionCategoryId is not null ");
+			}
+		}
+		if(questionExamType != null) {
+			isWhereFlag = true;
+			if(isWhereFlag) {
+			query = query.concat(" AND Q.questionExamType=:_4_questionExamType ");
+			} else {
+				query = query.concat(" WHERE Q.questionExamType=:_4_questionExamType ");
+			}
+			}
+		if(searchKey != null) {
+			if(isWhereFlag) {
+			query = query.concat(" AND UPPER(cast(Q.questionStatment as char)) like UPPER(:_3_searchKey) ");
+			} else {
+				query = query.concat(" WHERE UPPER(cast(Q.questionStatment as char)) like UPPER(:_3_searchKey) ");
+			}
+			}
+
+		query = query.concat(" ORDER BY Q.questionId desc");
+		return query;
+	}
+	
 	@Override
 	public Map<String, Object> listQuestionBank(Integer pageNo, Integer pageSize, String searchKey, Boolean active,
 			Integer userId, Integer questionCategoryId, Integer questionSubCategoryId, Integer questionExamType) throws Exception {
@@ -172,8 +206,9 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("_1_QuestionSubCategoryId", questionSubCategoryId);
 		parameters.put("_2_QuestionCategoryId", questionCategoryId);
-		parameters.put("_3_searchKey", searchKey);
 		parameters.put("_4_questionExamType", questionExamType);
+		parameters.put("_3_searchKey", searchKey);
+		
 		@SuppressWarnings("unchecked")
 		List<Integer> questionIdList = (List<Integer>) questionBankDao
 				.listSingleRowResult(QuestionBankDao.findByFilterCriteria, parameters);
