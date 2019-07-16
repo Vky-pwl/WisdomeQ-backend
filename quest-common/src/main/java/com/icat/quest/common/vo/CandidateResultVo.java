@@ -7,9 +7,9 @@ import java.util.List;
 
 
 public class CandidateResultVo implements Serializable{
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer candidateId;
@@ -29,16 +29,19 @@ public class CandidateResultVo implements Serializable{
 	private Float percentile=0f;
 	private Boolean belowAverage = false;
 	private String contactEmail;
-    private String contactNumber;
-    private Integer rank;
-    private Level technicalLevel;
-    private Level quantitativeLevel;
-    private Float technicalPercentile;
-    private float quantitativePercentile;
-    private Integer testConductorHasTestCodeId;
-    
+	private String contactNumber;
+	private Integer rank;
+	private Level technicalLevel;
+	private Level quantitativeLevel;
+	private Float technicalPercentile;
+	private float quantitativePercentile;
+	private ArrayList<String> aptitudeSections = new ArrayList<>();
+
 	public CandidateResultVo() {
 		super();
+		aptitudeSections.add(SectionName.Quantitative.name());
+		aptitudeSections.add(SectionName.Reasoning.name());
+		aptitudeSections.add(SectionName.English.name());
 	}
 
 	public String getContactEmail() {
@@ -191,8 +194,8 @@ public class CandidateResultVo implements Serializable{
 		return serialVersionUID;
 	}
 
-	
-	
+
+
 	public Float getPercentile() {
 		return percentile;
 	}
@@ -214,26 +217,38 @@ public class CandidateResultVo implements Serializable{
 		if(sectionResultList != null) {
 			Iterator<SectionResultVo> it = sectionResultList.iterator();
 			float technicalPercentile = 0f;
-			int count =0;
+			float aptitudePercentile = 0f;
+			int technicalCount =0;
+			int aptittudeCount=0;
 			while(it.hasNext()) {
 				SectionResultVo sectionResultVo = it.next();
 				if(sectionResultVo.getGrade() != null && sectionResultVo.getGrade().equals("C")) {
 					setBelowAverage(true);
 				}
-				if(sectionResultVo.getPercentile() != null && !SectionName.Psychometric.name().equals(sectionResultVo.getSectionName())) {
+				if(sectionResultVo.getPercentile() != null &&
+						!SectionName.Psychometric.name().equals(sectionResultVo.getSectionName()) &&
+						!SectionName.Technical.name().equals(sectionResultVo.getSectionName())) {
 					percentile= percentile+sectionResultVo.getPercentile();
 				}
-				if(SectionName.Quantitative.name().equals(sectionResultVo.getSectionName())) {
-					setQuantitativeLevel(sectionResultVo.getLevel());
-					setQuantitativePercentile(sectionResultVo.getPercentile());
-				} else if(!SectionName.Psychometric.name().equals(sectionResultVo.getSectionName())){
-					count++;
+				if(aptitudeSections.contains(sectionResultVo.getSectionName())) {
+					aptittudeCount++;
+					aptitudePercentile+=sectionResultVo.getPercentile();
+				} else if(SectionName.Technical.name().equals(sectionResultVo.getSectionName())){
+					technicalCount++;
 					technicalPercentile+=sectionResultVo.getPercentile();
 				}
 			}
-			setPercentile(percentile/3);
+			float aptitudePercentileAverage = aptitudePercentile/3;
+			setQuantitativePercentile(aptitudePercentileAverage);
+			if (aptitudePercentileAverage >= 65) {
+				setQuantitativeLevel(Level.HIGH);
+			} else if (aptitudePercentile/3 < 65 && aptitudePercentile/3 >= 40) {
+				setQuantitativeLevel(Level.MEDIUM);
+			} else {
+				setQuantitativeLevel(Level.LOW);
+			}
+			technicalPercentile=technicalPercentile/technicalCount;
 			setTechnicalPercentile(technicalPercentile);
-			technicalPercentile=technicalPercentile/count;
 			if (technicalPercentile >= 65) {
 				setTechnicalLevel(Level.HIGH);
 			} else if (technicalPercentile < 65 && technicalPercentile >= 40) {
@@ -241,10 +256,13 @@ public class CandidateResultVo implements Serializable{
 			} else {
 				setTechnicalLevel(Level.LOW);
 			}
+			setPercentile(technicalPercentile > 0f ?
+					technicalPercentile + aptitudePercentileAverage / 2
+					: aptitudePercentileAverage
+			);
 		}
 	}
 
-	
 
 	public Level getTechnicalLevel() {
 		return technicalLevel;
@@ -285,30 +303,23 @@ public class CandidateResultVo implements Serializable{
 	public void setQuantitativePercentile(float quantitativePercentile) {
 		this.quantitativePercentile = quantitativePercentile;
 	}
-	
-	
-	
-	public Integer getTestConductorHasTestCodeId() {
-		return testConductorHasTestCodeId;
-	}
-
-	public void setTestConductorHasTestCodeId(Integer testConductorHasTestCodeId) {
-		this.testConductorHasTestCodeId = testConductorHasTestCodeId;
-	}
 
 	public void calculateCandidateResult() {
 		if (sectionResultList != null) {
 			Iterator<SectionResultVo> it = sectionResultList.iterator();
 			float technicalPercentile = 0f;
+			float aptitudePercentile = 0f;
 			int sectionCount = 0;
-			int count = 0;
+			int technicalCount = 0;
+			int aptitudeCount = 0;
 			Float percentile = 0f;
 			Integer totalAttemptQuestion = 0;
 			Integer totalCorrectAnswer = 0;
 			Float totalUserMarks = 0f;
 			while (it.hasNext()) {
 				SectionResultVo sectionResultVo = it.next();
-				if (SectionName.Psychometric.name().equals(sectionResultVo.getSectionName())) {
+				if (SectionName.Psychometric.name().equals(sectionResultVo.getSectionName())
+						|| SectionName.Other.name().equals(sectionResultVo.getSectionName())) {
 					continue;
 				}
 
@@ -320,24 +331,27 @@ public class CandidateResultVo implements Serializable{
 				if (sectionResultVo.getGrade() != null && sectionResultVo.getGrade().equals("C")) {
 					this.belowAverage = true;
 				}
-				
-				if (SectionName.Quantitative.name().equals(sectionResultVo.getSectionName())) {
-					this.quantitativeLevel = sectionResultVo.getLevel();
-					this.quantitativePercentile = sectionResultVo.getPercentile();
-
+				if (aptitudeSections.contains(sectionResultVo.getSectionName())) {
+					aptitudeCount++;
+					aptitudePercentile += sectionResultVo.getPercentile();
 				} else {
-					count++;
+					technicalCount++;
 					technicalPercentile += sectionResultVo.getPercentile();
 				}
 			}
 			this.totalAttemptQuestion = totalAttemptQuestion;
 			this.totalCorrectAnswer = totalCorrectAnswer;
 			this.userTotalMarks = totalUserMarks;
-			this.percentile = percentile / sectionCount;
-			this.technicalPercentile = technicalPercentile / count;
-			if (technicalPercentile >= 65) {
+			this.quantitativePercentile = aptitudePercentile / aptitudeCount;
+			this.technicalPercentile = technicalPercentile / technicalCount;
+			this.setTechnicalPercentile(this.technicalPercentile);
+			float totalPercentile = (this.technicalPercentile > 0f)
+					? (this.technicalPercentile + this.quantitativePercentile) / 2
+					: this.quantitativePercentile;
+			this.setPercentile(totalPercentile);
+			if (this.technicalPercentile >= 65) {
 				this.technicalLevel = Level.HIGH;
-			} else if (technicalPercentile < 65 && technicalPercentile >= 40) {
+			} else if (this.technicalPercentile < 65 && this.technicalPercentile >= 40) {
 				this.technicalLevel = Level.MEDIUM;
 			} else {
 				this.technicalLevel = Level.LOW;
@@ -345,5 +359,5 @@ public class CandidateResultVo implements Serializable{
 		}
 	}
 
-	
+
 }
