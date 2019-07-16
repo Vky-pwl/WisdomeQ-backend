@@ -36,12 +36,21 @@ public class CandidateResultVo implements Serializable{
 	private Float technicalPercentile;
 	private float quantitativePercentile;
 	private ArrayList<String> aptitudeSections = new ArrayList<>();
+	private Integer testConductorHasTestCodeId;
 
 	public CandidateResultVo() {
 		super();
 		aptitudeSections.add(SectionName.Quantitative.name());
 		aptitudeSections.add(SectionName.Reasoning.name());
 		aptitudeSections.add(SectionName.English.name());
+	}
+
+	public Integer getTestConductorHasTestCodeId() {
+		return testConductorHasTestCodeId;
+	}
+
+	public void setTestConductorHasTestCodeId(Integer testConductorHasTestCodeId) {
+		this.testConductorHasTestCodeId = testConductorHasTestCodeId;
 	}
 
 	public String getContactEmail() {
