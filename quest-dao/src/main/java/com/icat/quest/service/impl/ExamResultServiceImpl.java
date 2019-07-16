@@ -6,7 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Comparator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,11 +47,12 @@ public class ExamResultServiceImpl implements ExamResultService {
 	private CandidateDao candidateDao;
 	@Autowired
 	private QuestionCategoryDao questionCategoryDao;
+	private static final Logger LOGGER = LoggerFactory.getLogger(ExamResultServiceImpl.class);
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> getCandRankExamList(int pageSize, int pageNo, Integer collegeId, Integer candidateId,
-			Integer specilizationId, Float percentile) {
+												   Integer specilizationId, Float percentile) {
 
 		Map<String, Object> result = new HashMap<>();
 		List<Integer> idList = null;
@@ -117,7 +121,7 @@ public class ExamResultServiceImpl implements ExamResultService {
 
 	@Override
 	public Map<String, Object> getExamTotalAttemps(Integer pageNo, Integer pageSize, Integer collegeId,
-			Integer specilizationId) {
+												   Integer specilizationId) {
 		List<ExamResultShortDescVo> examResultShortDescVoList = new ArrayList<>();
 		Map<String, Object> resultMap = new HashMap<>();
 
@@ -160,7 +164,7 @@ public class ExamResultServiceImpl implements ExamResultService {
 
 	@Override
 	public Map<String, Object> getResultsByExamId(Integer examId, Integer pageNo, Integer pageSize, Integer collegeId,
-			Integer specilizationId, Float percentile) {
+												  Integer specilizationId, Float percentile) {
 		Map<String, Object> paramsKayAndValues = new HashMap<String, Object>();
 		paramsKayAndValues.put("_2_examId", examId);
 
@@ -189,14 +193,20 @@ public class ExamResultServiceImpl implements ExamResultService {
 
 		}
 
-		List<CandidateExamSummaryDescVo> candidateExamSummaryDescVos = new ArrayList<>();
+		/*List<CandidateExamSummaryDescVo> candidateExamSummaryDescVos = new ArrayList<>();
 		if (examSummaryResultVoArray != null && examSummaryResultVoArray.size() > 0) {
 			for (Object[] obj : examSummaryResultVoArray) {
 				candidateExamSummaryDescVos
 						.add(new CustomGenericTypeImpl<CandidateExamSummaryDescVo>(CandidateExamSummaryDescVo.class)
 								.converter(obj, null));
 			}
-		}
+		}*/
+
+		List<CandidateExamSummaryDescVo> candidateExamSummaryDescVos =
+				examSummaryResultVoArray.stream().map((examSummaryResultVo) -> {
+					return new CustomGenericTypeImpl<CandidateExamSummaryDescVo>(CandidateExamSummaryDescVo.class)
+							.converter(examSummaryResultVo, null);
+				}).collect(Collectors.toList());
 
 		if (candidateExamSummaryDescVos == null || candidateExamSummaryDescVos.isEmpty()
 				|| candidateExamSummarieList == null || candidateExamSummarieList.isEmpty()) {
@@ -244,6 +254,7 @@ public class ExamResultServiceImpl implements ExamResultService {
 	public CandidateResultVo getCertificate(Integer tchtcId, Integer candidateId) {
 		Map<String, Object> paramsKayAndValues = new HashMap<String, Object>();
 		paramsKayAndValues.put("_1_TCHTCID", tchtcId);
+		paramsKayAndValues.put("",candidateId);
 		List<CandidateExamSummary> candidateExamSummarieList = candidateExamSummaryDao
 				.listEntityByParameter(CandidateExamSummaryDao.findByTCHTCID, paramsKayAndValues, null, null);
 
@@ -267,7 +278,7 @@ public class ExamResultServiceImpl implements ExamResultService {
 	}
 
 	private CandidateResultVo getCandidateResult(List<CandidateExamSummary> candidateExamSummarieList,
-			List<CandidateExamSummaryDescVo> candidateExamSummaryDescVos) {
+												 List<CandidateExamSummaryDescVo> candidateExamSummaryDescVos) {
 		Map<Integer, SectionResultVo> mapSectionResult = mapSectionResult(candidateExamSummarieList);
 		Map<Integer, List<Integer>> sectionIdAndQuestionCategoryIdList = new HashMap<>();
 		CandidateResultVo candidateResultVo = new CandidateResultVo();
@@ -295,7 +306,7 @@ public class ExamResultServiceImpl implements ExamResultService {
 				if (!sectionIdAndQuestionCategoryIdList.containsKey(candidateExamSummaryDescVo.getExamSectionId())) {
 					sectionResultVo.setTotalMarks(candidateExamSummaryDescVo.getSectionTotalMarks());
 					sectionResultVo.setExamSectionId(candidateExamSummaryDescVo.getExamSectionId());
-					sectionResultVo.setExamSectionName(candidateExamSummaryDescVo.getSectionName());
+					sectionResultVo.setExamSectionName(candidateExamSummaryDescVo.getExamSectionName());
 					sectionResultVo.setTotalQuestion(candidateExamSummaryDescVo.getSectionTotalQuestion());
 
 					Map<String, Object> percMap = ResultPercentileService
@@ -416,15 +427,15 @@ public class ExamResultServiceImpl implements ExamResultService {
 		String summary = SkillAssessmentReport.getSkillAssesstmentSkill(candidateResultVo.getTechnicalLevel(),
 				candidateResultVo.getQuantitativeLevel());
 		Map<String, String> resultSummary = new HashMap<>();
-		resultSummary.put("quantativeLevel", candidateResultVo.getQuantitativeLevel() != null ? candidateResultVo.getQuantitativeLevel().name() : null );
-		resultSummary.put("technicalLevel", candidateResultVo.getTechnicalLevel() != null ? candidateResultVo.getTechnicalLevel().name() : null);
+		resultSummary.put("quantativeLevel", candidateResultVo.getQuantitativeLevel().name());
+		resultSummary.put("technicalLevel", candidateResultVo.getTechnicalLevel().name());
 		resultSummary.put("summary", summary);
 		return resultSummary;
 	}
 
 	@Override
 	public Map<String, Object> getResultsByExamId(Integer examId, Integer pageNo, Integer pageSize, Integer collegeId,
-			Integer specilizationId, Long startDate, Long endDate) {
+												  Integer specilizationId, Long startDate, Long endDate) {
 
 		Map<String, Object> paramsKayAndValues = new HashMap<String, Object>();
 		paramsKayAndValues.put("_2_examId", examId);
@@ -432,7 +443,7 @@ public class ExamResultServiceImpl implements ExamResultService {
 		paramsKayAndValues.put("_3_specializationId", specilizationId);
 		paramsKayAndValues.put("_4_startDate", startDate != null ? new Date(startDate) : null);
 		paramsKayAndValues.put("_5_endDate", startDate != null ? new Date(endDate) : null);
-		
+
 		List<Object[]> userTotalMarksArray = testConductorHasTestCodeDao
 				.listCompositeSqlQuery(TestConductorHasTestCodeDao.findUserMarks, paramsKayAndValues);
 		if (userTotalMarksArray == null || userTotalMarksArray.size() == 0) {
@@ -502,7 +513,6 @@ public class ExamResultServiceImpl implements ExamResultService {
 							mapCandExamDescList.get(testConductorHasTestCodeId));
 					UserMarksVo userMarksVo = mapUserMarksVo.get(testConductorHasTestCodeId);
 					candidateResultVo.setRank(userMarksVo.getRank());
-					candidateResultVo.setTestConductorHasTestCodeId(testConductorHasTestCodeId);
 					candidateResultVos.add(candidateResultVo);
 				}
 			}
@@ -517,14 +527,14 @@ public class ExamResultServiceImpl implements ExamResultService {
 	// new API
 	@Override
 	public Map<String, Object> getResultListByExamId(Integer examId, Integer pageNo, Integer pageSize,
-			Integer collegeId, Integer specilizationId, Float percentile, Long startDate, Long endDate) {
+													 Integer collegeId, Integer specilizationId, Float percentile, Long startDate, Long endDate) {
 		Map<String, Object> paramsKayAndValues = new HashMap<String, Object>();
 		paramsKayAndValues.put("_1_examId", examId);
 		paramsKayAndValues.put("_2_collegeId", collegeId);
 		paramsKayAndValues.put("_3_specializationId", specilizationId);
 		paramsKayAndValues.put("_4_startDate", startDate != null ? new Date(startDate) : null);
 		paramsKayAndValues.put("_5_endDate", startDate != null ? new Date(endDate) : null);
-		
+
 		List<String> excludeList = new ArrayList<>();
 		excludeList.add("examSectionName");
 		excludeList.add("questionCategoryName");
@@ -579,17 +589,18 @@ public class ExamResultServiceImpl implements ExamResultService {
 		List<CandidateResultVo> candidateResultVoList = new ArrayList<>();
 
 		for (Integer tchtcId : mapExamResultList.keySet()) {
-			CandidateResultVo candidateResultVo = transformCandidateResult(mapExamResultList.get(tchtcId), mapCandidate, mapQuestionCategory);
-			candidateResultVo.setTestConductorHasTestCodeId(tchtcId);
-			candidateResultVoList.add(candidateResultVo);
+			candidateResultVoList
+					.add(transformCandidateResult(mapExamResultList.get(tchtcId), mapCandidate, mapQuestionCategory));
 		}
 
-		candidateResultVoList
-				.sort((CandidateResultVo c1, CandidateResultVo c2) -> c2.getUserTotalMarks().compareTo(c1.getUserTotalMarks()));
+		candidateResultVoList.sort(Comparator.comparing(CandidateResultVo::getUserTotalMarks));
 
 		int rank = 0;
 		for (CandidateResultVo candidateResultVo : candidateResultVoList) {
-			candidateResultVo.setRank(++rank);
+			++rank;
+			LOGGER.debug("percentile:: "+candidateResultVo.getPercentile());
+			LOGGER.debug("rank:: "+rank);
+			candidateResultVo.setRank(rank);
 		}
 
 		int startIndex = (pageNo * pageSize) - pageSize;
@@ -607,7 +618,7 @@ public class ExamResultServiceImpl implements ExamResultService {
 	}
 
 	private CandidateResultVo transformCandidateResult(List<ExamResultCompositeVo> examResultCompositeVos,
-			Map<Integer, Candidate> mapCandidate, Map<Integer, QuestionCategory> mapQuestionCategory) {
+													   Map<Integer, Candidate> mapCandidate, Map<Integer, QuestionCategory> mapQuestionCategory) {
 		CandidateResultVo candidateResultVo = new CandidateResultVo();
 		for (ExamResultCompositeVo examResultCompositeVo : examResultCompositeVos) {
 			Candidate candidate = mapCandidate.get(examResultCompositeVo.getCandidateId());
@@ -635,7 +646,7 @@ public class ExamResultServiceImpl implements ExamResultService {
 	}
 
 	private List<SectionResultVo> getSectionResultList(List<ExamResultCompositeVo> examResultCompositeVoList,
-			Map<Integer, QuestionCategory> mapQuestionCategory) {
+													   Map<Integer, QuestionCategory> mapQuestionCategory) {
 
 		Map<Integer, SectionResultVo> mapSectionResult = new HashMap<>();
 		if (examResultCompositeVoList != null && examResultCompositeVoList.size() > 0) {
