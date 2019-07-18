@@ -1,5 +1,8 @@
 package com.icat.quest.common.vo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,6 +10,8 @@ import java.util.List;
 
 
 public class CandidateResultVo implements Serializable{
+
+	Logger logger = LoggerFactory.getLogger(CandidateResultVo.class);
 
 	/**
 	 *
@@ -239,10 +244,12 @@ public class CandidateResultVo implements Serializable{
 						!SectionName.Technical.name().equals(sectionResultVo.getSectionName())) {
 					percentile= percentile+sectionResultVo.getPercentile();
 				}
-				if(aptitudeSections.contains(sectionResultVo.getSectionName())) {
+				if(aptitudeSections.contains(sectionResultVo.getSectionName())
+				&& sectionResultVo.getPercentile()!=null) {
 					aptittudeCount++;
 					aptitudePercentile+=sectionResultVo.getPercentile();
-				} else if(SectionName.Technical.name().equals(sectionResultVo.getSectionName())){
+				} else if(SectionName.Technical.name().equals(sectionResultVo.getSectionName())
+						&& sectionResultVo.getPercentile()!=null){
 					technicalCount++;
 					technicalPercentile+=sectionResultVo.getPercentile();
 				}
@@ -340,19 +347,25 @@ public class CandidateResultVo implements Serializable{
 				if (sectionResultVo.getGrade() != null && sectionResultVo.getGrade().equals("C")) {
 					this.belowAverage = true;
 				}
-				if (aptitudeSections.contains(sectionResultVo.getSectionName())) {
+				if (aptitudeSections.contains(sectionResultVo.getSectionName())
+						&& sectionResultVo.getPercentile() != null) {
 					aptitudeCount++;
 					aptitudePercentile += sectionResultVo.getPercentile();
-				} else {
+				} else if (SectionName.Technical.name().equals(sectionResultVo.getSectionName())
+				 && sectionResultVo.getPercentile()!=null){
 					technicalCount++;
 					technicalPercentile += sectionResultVo.getPercentile();
+				} else {
+					logger.error("Unexpected section encountered {}", sectionResultVo.getSectionName());
 				}
 			}
 			this.totalAttemptQuestion = totalAttemptQuestion;
 			this.totalCorrectAnswer = totalCorrectAnswer;
 			this.userTotalMarks = totalUserMarks;
-			this.quantitativePercentile = aptitudePercentile / aptitudeCount;
-			this.technicalPercentile = technicalPercentile / technicalCount;
+			this.quantitativePercentile = (aptitudePercentile > 0f && aptitudeCount > 0)
+					? aptitudePercentile / aptitudeCount : 0f;
+			this.technicalPercentile = (technicalPercentile > 0f && technicalCount > 0) ?
+					technicalPercentile / technicalCount : 0f;
 			this.setTechnicalPercentile(this.technicalPercentile);
 			float totalPercentile = (this.technicalPercentile > 0f)
 					? (this.technicalPercentile + this.quantitativePercentile) / 2

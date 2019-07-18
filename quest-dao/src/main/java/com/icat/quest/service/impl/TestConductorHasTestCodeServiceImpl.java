@@ -141,7 +141,10 @@ public class TestConductorHasTestCodeServiceImpl implements TestConductorHasTest
 					userId, exam.getStartDate() != null ? exam.getStartDate().getTime() : null);
 			testConductorHasTestCode.setTinyKey(tinyKey);
 			testConductorHasTestCode.setTestCode(
-					UniqueCodeGeneratorImpl.getExamCode(testConductorLicense.getTestConductorLicenseId() + "",examId + "", testConductorHasTestCode.getTestConductorHasTestCodeId() + ""));
+					UniqueCodeGeneratorImpl.getExamCode(
+							testConductorLicense.getTestConductorLicenseId() + "",
+							examId + "",
+							testConductorHasTestCode.getTestConductorHasTestCodeId() + ""));
 			
 		}
 		

@@ -11,7 +11,7 @@ public interface CandidateExamSummaryDao extends GenericDao<CandidateExamSummary
 			"where ESHQ.examSectionHasQuestionId =:_1_examSectionHasQuestionId";
 
 	public static String findByTCHTCIdAndQuestionId = "from com.icat.quest.model.CandidateExamSummary candidateExamSummary where candidateExamSummary.testConductorHasTestCodeId=:_1_TCHTCId and candidateExamSummary.examSectionHasQuestionId=:_2_questionId ";
-	public static String findByTCHTCID = "from com.icat.quest.model.CandidateExamSummary candidateExamSummary where candidateExamSummary.testConductorHasTestCodeId=:_1_TCHTCID and active = true";
+	public static String findByTCHTCID = "from com.icat.quest.model.CandidateExamSummary candidateExamSummary where candidateExamSummary.testConductorHasTestCodeId=:_1_TCHTCId and active = true";
 	
 	public static String findAllByExamId = "from com.icat.quest.model.CandidateExamSummary candidateExamSummary where candidateExamSummary.examId=:_2_examId and active = true";
 	
@@ -22,7 +22,7 @@ public interface CandidateExamSummaryDao extends GenericDao<CandidateExamSummary
 			"ESQC.questionCategoryName examSectionName, ES.totalMarks sectionTotalMarks, ES.totalQuestion sectionTotalQuestion, \n" + 
 			"EC.examCategoryName, TCHTC.examStartDate, TCHTC.testCode,QB.questionCategoryId, QC.questionCategoryName, C.contactEmail, C.contactNumber , ES.sectionName, TCHTC.testConductorHasTestCodeId  \n" + 
 			"from Exam E, ExamCategory EC, ExamSection ES, QuestionCategory ESQC, TestConductorHasTestCode TCHTC, User C, ExamSectionHasQuestion ESHQ, QuestionBank QB, QuestionCategory QC\n" + 
-			"where TCHTC.testConductorHasTestCodeId=:_1_TCHTCID and E.examId = TCHTC.examId and C.userId = TCHTC.userId and EC.examCategoryId = E.examCategoryId\n" + 
+			"where TCHTC.testConductorHasTestCodeId=:_1_TCHTCId and E.examId = TCHTC.examId and C.userId = TCHTC.userId and EC.examCategoryId = E.examCategoryId\n" + 
 			"and ES.examId = E.examId and ES.questionCategoryId= ESQC.questionCategoryId and ESHQ.examSectionId = ES.examSectionId and QB.questionId = ESHQ.questionId\n" + 
 			"and QC.questionCategoryId = QB.questionCategoryId and ES.active = true and ESHQ.active = true and TCHTC.status='COMPLETED'";
 	

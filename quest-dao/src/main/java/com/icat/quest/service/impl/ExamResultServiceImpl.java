@@ -253,7 +253,7 @@ public class ExamResultServiceImpl implements ExamResultService {
 	@Override
 	public CandidateResultVo getCertificate(Integer tchtcId, Integer candidateId) {
 		Map<String, Object> paramsKayAndValues = new HashMap<String, Object>();
-		paramsKayAndValues.put("_1_TCHTCID", tchtcId);
+		paramsKayAndValues.put("_1_TCHTCId", tchtcId);
 		paramsKayAndValues.put("",candidateId);
 		List<CandidateExamSummary> candidateExamSummarieList = candidateExamSummaryDao
 				.listEntityByParameter(CandidateExamSummaryDao.findByTCHTCID, paramsKayAndValues, null, null);
