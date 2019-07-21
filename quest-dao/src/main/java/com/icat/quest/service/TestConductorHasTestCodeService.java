@@ -21,7 +21,7 @@ public interface TestConductorHasTestCodeService {
 
 	ExamStatusVo getExamStatus(Integer examId);
 
-	void assignedUserTestCode(List<Integer> userIdList, Integer testConductorLicenseId, Integer userId, Boolean flag,
+	Map<Integer,String> assignedUserTestCode(List<Integer> userIdList, Integer testConductorLicenseId, Integer userId, Boolean flag,
 			String tinyKey) throws Exception;
 
 	void updateTestCodes();

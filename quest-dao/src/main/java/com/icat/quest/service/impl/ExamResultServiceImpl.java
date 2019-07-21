@@ -254,7 +254,7 @@ public class ExamResultServiceImpl implements ExamResultService {
 	public CandidateResultVo getCertificate(Integer tchtcId, Integer candidateId) {
 		Map<String, Object> paramsKayAndValues = new HashMap<String, Object>();
 		paramsKayAndValues.put("_1_TCHTCId", tchtcId);
-		paramsKayAndValues.put("",candidateId);
+		//paramsKayAndValues.put("",candidateId);
 		List<CandidateExamSummary> candidateExamSummarieList = candidateExamSummaryDao
 				.listEntityByParameter(CandidateExamSummaryDao.findByTCHTCID, paramsKayAndValues, null, null);
 
@@ -513,6 +513,7 @@ public class ExamResultServiceImpl implements ExamResultService {
 							mapCandExamDescList.get(testConductorHasTestCodeId));
 					UserMarksVo userMarksVo = mapUserMarksVo.get(testConductorHasTestCodeId);
 					candidateResultVo.setRank(userMarksVo.getRank());
+					candidateResultVo.setTestConductorHasTestCodeId(testConductorHasTestCodeId);
 					candidateResultVos.add(candidateResultVo);
 				}
 			}

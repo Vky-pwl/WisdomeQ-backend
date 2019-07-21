@@ -174,6 +174,7 @@ public class DbHibernateConfig<T, PK extends Serializable> {
 		props.put("hibernate.generate_statistics",
 				SystemConfigResolver.getProperty("hibernate.generate_statistics", ""));
 		props.put("hibernate.show_sql", SystemConfigResolver.getProperty("hibernate.show_sql", ""));
+		props.put("hibernate.format_sql", SystemConfigResolver.getProperty("hibernate.format_sql", ""));
 
 		props.put("hibernate.c3p0.acquire_increment",
 				SystemConfigResolver.getProperty("hibernate.c3p0.acquire_increment", ""));

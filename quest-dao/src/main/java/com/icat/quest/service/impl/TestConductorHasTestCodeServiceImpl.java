@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,8 @@ import com.icat.quest.utils.TinyLinkService;
 
 @Service
 public class TestConductorHasTestCodeServiceImpl implements TestConductorHasTestCodeService {
+
+	private static final Logger logger = LoggerFactory.getLogger(TestConductorHasTestCodeServiceImpl.class);
 
 	@Autowired
 	private TestConductorHasTestCodeDao testConductorHasTestCodeDao;
@@ -76,8 +80,11 @@ public class TestConductorHasTestCodeServiceImpl implements TestConductorHasTest
 	}
 
 	@Override
-	public void assignedUserTestCode(List<Integer> userIdList, Integer testConductorLicenseId, Integer userId,
+	public Map<Integer,String> assignedUserTestCode(List<Integer> userIdList, Integer testConductorLicenseId,
+												Integer userId,
 			Boolean flag, String tinyKey) throws Exception {
+
+		Map<Integer,String> testCodeTinyKey = new HashMap<> ();
 		TinyLinkService tinyLinkService = (TinyLinkService) SpringApplicationContext.getBean("tinyLinkService");		
 		TestConductorLicense testConductorLicense = testConductorLicenseDao.read(testConductorLicenseId);
 		if (flag && !testConductorLicense.getTestConductor().getTestConductorId().equals(userId)) {
@@ -95,7 +102,7 @@ public class TestConductorHasTestCodeServiceImpl implements TestConductorHasTest
 			userIdList.removeAll(users);
 		}
 		if (userIdList.isEmpty()) {
-			return;
+			return null;
 		}
 		if (testConductorLicense.getRemainingLicenseCount() < userIdList.size()) {
 			throw new Exception("License Exceed ");
@@ -145,9 +152,9 @@ public class TestConductorHasTestCodeServiceImpl implements TestConductorHasTest
 							testConductorLicense.getTestConductorLicenseId() + "",
 							examId + "",
 							testConductorHasTestCode.getTestConductorHasTestCodeId() + ""));
-			
+			testCodeTinyKey.put(userId,tinyKey);
+			logger.debug("TestConductorHasTestCode {}",testConductorHasTestCode);
 		}
-		
 		if (testConductorHasTestCodes.size() > 0) {
 			testConductorHasTestCodeDao.updateBatch(testConductorHasTestCodes);
 			
@@ -156,7 +163,9 @@ public class TestConductorHasTestCodeServiceImpl implements TestConductorHasTest
 			
 			testConductorLicenseDao.update(testConductorLicense);
 		}
-		
+
+		logger.debug("testCodeTinyKey {}",testCodeTinyKey );
+		return testCodeTinyKey;
 	}
 
 	@Override

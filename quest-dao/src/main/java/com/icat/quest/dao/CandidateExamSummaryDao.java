@@ -11,7 +11,8 @@ public interface CandidateExamSummaryDao extends GenericDao<CandidateExamSummary
 			"where ESHQ.examSectionHasQuestionId =:_1_examSectionHasQuestionId";
 
 	public static String findByTCHTCIdAndQuestionId = "from com.icat.quest.model.CandidateExamSummary candidateExamSummary where candidateExamSummary.testConductorHasTestCodeId=:_1_TCHTCId and candidateExamSummary.examSectionHasQuestionId=:_2_questionId ";
-	public static String findByTCHTCID = "from com.icat.quest.model.CandidateExamSummary candidateExamSummary where candidateExamSummary.testConductorHasTestCodeId=:_1_TCHTCId and active = true";
+	public static String findByTCHTCID = "from com.icat.quest.model.CandidateExamSummary candidateExamSummary where " +
+			"candidateExamSummary.testConductorHasTestCodeId=:_1_TCHTCId and candidateExamSummary.active = true";
 	
 	public static String findAllByExamId = "from com.icat.quest.model.CandidateExamSummary candidateExamSummary where candidateExamSummary.examId=:_2_examId and active = true";
 	

@@ -85,7 +85,8 @@ public class TestConductorHasTestCodeController {
 			@SuppressWarnings("unchecked")
 			List<Integer> userIdList = (List<Integer>)requestParam.get("userIdList") ;
 			String tinyKey = null;
-			testConductorHasTestCodeService.assignedUserTestCode(userIdList,testConductorLicenseId, userId,flag, tinyKey);
+			testConductorHasTestCodeService.assignedUserTestCode(userIdList,testConductorLicenseId, userId, flag,
+					tinyKey);
 			return new ResponseBuilder(false).status(ResponseBuilder.Status.success).build();
 		} catch (Exception e) {
 			e.printStackTrace();
