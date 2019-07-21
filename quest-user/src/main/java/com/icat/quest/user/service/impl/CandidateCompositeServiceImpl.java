@@ -98,16 +98,17 @@ public class CandidateCompositeServiceImpl implements CandidateCompositeService 
                 List<Integer> userIdList = new ArrayList<>();
                 Integer userId = (Integer) candidateResponse.get(Constants.STATUS_SUCCESS);
                 userIdList.add(userId);
-                String tinyKey = null;/*tinyLinkService.shortenURL(
-                        publishExamLicense.getTestConductorLicense().getTestConductorLicenseId(),
-                        userId, Calendar.getInstance().getTimeInMillis());*/
-                testConductorHasTestCodeService.assignedUserTestCode(userIdList,
+                String tinyKey = null;
+                Map<Integer,String> testCodeTinyKeyMap =
+                        testConductorHasTestCodeService.assignedUserTestCode(userIdList,
                         publishExamLicense.getTestConductorLicense().getTestConductorLicenseId(), userId, false,
                         tinyKey);
-                if (tinyKey == null) {
+                if (tinyKey == null && testCodeTinyKeyMap.size() == 0) {
                     LOGGER.info("Already Assigned exam");
                     response.put(Constants.STATUS_ERROR, "Already Assigned exam");
                     return response;
+                } else {
+                    tinyKey = testCodeTinyKeyMap.get(userId);
                 }
                 response.put(Constants.STATUS_SUCCESS, Constants.STATUS_SUCCESS);
                 response.put("tinyKey", tinyKey);

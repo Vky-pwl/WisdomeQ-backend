@@ -54,7 +54,7 @@ public class TestConductorHasTestCodeUserServiceImpl implements TestConductorHas
 	
 	private void setTotalMarksAndAttempts(Integer tchtcId, TestConductorHasTestCode testConductorHasTestCode) {
 		Map<String, Object> paramsKayAndValues = new HashMap<String, Object>();
-		paramsKayAndValues.put("_1_TCHTCID", tchtcId);
+		paramsKayAndValues.put("_1_TCHTCId", tchtcId);
 		List<CandidateExamSummary> candidateExamSummarieList = candidateExamSummaryDao
 				.listEntityByParameter(CandidateExamSummaryDao.findByTCHTCID, paramsKayAndValues, null, null);
 		if (candidateExamSummarieList == null) {
