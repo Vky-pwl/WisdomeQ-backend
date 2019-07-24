@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -109,9 +110,13 @@ public class CandidateExamServiceImpl implements CandidateExamService {
 			examVos = transformExamVoList(testConductorHasTestCodeList);
 			responseMap.put("examVoList", examVos);
 		}
+		List<Exam> examList =
+				testConductorHasTestCodeList.stream()
+						.map((testConductorHasTestCode)->testConductorHasTestCode.getExam())
+						.collect(Collectors.toList());
 		if (userType != null && userId != null) {
 			Map<Integer, List<PermissionVo>> permissionMap = userHasPermissionService
-					.getPermissionListGroupByExamId(userId, userType);
+					.getPermissionListGroupByExamId(userId, userType, examList);
 			for (ExamVo examVo : examVos) {
 				if (permissionMap.containsKey(examVo.getExamId())) {
 					examVo.setPermissionVoList(permissionMap.get(examVo.getExamId()));
