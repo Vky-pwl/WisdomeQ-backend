@@ -12,6 +12,18 @@ public class CandidateResultVoTest{
 
     @Before
     public void setup(){
+        init_candidate();
+    }
+
+    @Test
+    public void testCalculatePercentile(){
+        candidateResultVo.calculatePercentile();
+        Assert.assertEquals(48.96f,candidateResultVo.getQuantitativePercentile(), 0.01f);
+        Assert.assertEquals(3.98f,candidateResultVo.getTechnicalPercentile(), 0.01f);
+        Assert.assertEquals(26.47f, candidateResultVo.getPercentile(),0.1f);
+    }
+
+    private void init_candidate(){
         List<SectionResultVo> sectionResultVoList = new ArrayList();
 
         SectionResultVo sectionResultVo = new SectionResultVo();
@@ -50,12 +62,30 @@ public class CandidateResultVoTest{
         sectionResultVo2.setPercentile(23.0f);
         sectionResultVoList.add(sectionResultVo2);
 
-        candidateResultVo.setSectionResultList(sectionResultVoList);
-    }
+        SectionResultVo sectionResultVo3 = new SectionResultVo();
+        sectionResultVo3.setExamSectionId(13);
+        sectionResultVo3.setExamSectionName("Mechanical");
+        sectionResultVo3.setSectionName(SectionName.Technical.name());
+        sectionResultVo3.setTotalMarks(900);
+        sectionResultVo3.setUserTotalMarks(180.0f);
+        sectionResultVo3.setTotalCorrectAnswer(2);
+        sectionResultVo3.setTotalAttemptQuestion(10);
+        sectionResultVo3.setTotalQuestion(10);
+        sectionResultVo3.setPercentile(3.9833336f);
+        sectionResultVoList.add(sectionResultVo3);
 
-    @Test
-    public void testCalculatePercentile(){
-        candidateResultVo.calculatePercentile();
-        Assert.assertEquals(48.96f,candidateResultVo.getQuantitativePercentile(), 0.01f);
+        SectionResultVo sectionResultVo4 = new SectionResultVo();
+        sectionResultVo4.setExamSectionId(41);
+        sectionResultVo4.setExamSectionName(SectionName.Psychometric.name());
+        sectionResultVo4.setSectionName(SectionName.Other.name());
+        sectionResultVo4.setTotalMarks(21);
+        sectionResultVo4.setUserTotalMarks(15f);
+        sectionResultVo4.setTotalCorrectAnswer(15);
+        sectionResultVo4.setTotalAttemptQuestion(21);
+        sectionResultVo4.setTotalQuestion(21);
+        sectionResultVo4.setPercentile(71.0f);
+        sectionResultVoList.add(sectionResultVo4);
+
+        candidateResultVo.setSectionResultList(sectionResultVoList);
     }
 }

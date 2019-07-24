@@ -239,10 +239,8 @@ public class CandidateResultVo implements Serializable{
 				if(sectionResultVo.getGrade() != null && sectionResultVo.getGrade().equals("C")) {
 					setBelowAverage(true);
 				}
-				if(sectionResultVo.getPercentile() != null &&
-						!SectionName.Psychometric.name().equals(sectionResultVo.getSectionName()) &&
-						!SectionName.Technical.name().equals(sectionResultVo.getSectionName())) {
-					percentile= percentile+sectionResultVo.getPercentile();
+				if(sectionResultVo.getPercentile() != null) {
+					percentile= percentile + sectionResultVo.getPercentile();
 				}
 				if(aptitudeSections.contains(sectionResultVo.getSectionName())
 				&& sectionResultVo.getPercentile()!=null) {
@@ -272,10 +270,10 @@ public class CandidateResultVo implements Serializable{
 			} else {
 				setTechnicalLevel(Level.LOW);
 			}
-			setPercentile(technicalPercentile > 0f ?
-					technicalPercentile + aptitudePercentileAverage / 2
-					: aptitudePercentileAverage
-			);
+
+			setPercentile((technicalCount > 0) ?
+					(technicalPercentile + aptitudePercentileAverage) / 2
+					: aptitudePercentileAverage);
 		}
 	}
 
