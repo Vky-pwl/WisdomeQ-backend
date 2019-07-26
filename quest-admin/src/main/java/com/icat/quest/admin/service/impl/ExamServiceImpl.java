@@ -239,10 +239,12 @@ public class ExamServiceImpl implements ExamService {
 
 		if (userType != null && userId != null) {
 			Map<Integer, List<PermissionVo>> permissionMap = userHasPermissionService
-					.getPermissionListGroupByExamId(userId, userType);
-			for (ExamVo examVo : examVos) {
-				if (permissionMap.containsKey(examVo.getExamId())) {
-					examVo.setPermissionVoList(permissionMap.get(examVo.getExamId()));
+					.getPermissionListGroupByExamId(userId, userType, examList);
+			if(permissionMap!=null && examVos!=null){
+				for (ExamVo examVo : examVos) {
+					if (permissionMap.containsKey(examVo.getExamId())) {
+						examVo.setPermissionVoList(permissionMap.get(examVo.getExamId()));
+					}
 				}
 			}
 		}
@@ -308,7 +310,7 @@ public class ExamServiceImpl implements ExamService {
 
 		if (userType != null && userId != null) {
 			Map<Integer, List<PermissionVo>> permissionMap = userHasPermissionService
-					.getPermissionListGroupByExamId(userId, userType);
+					.getPermissionListGroupByExamId(userId, userType, examList);
 			for (ExamVo examVo : examVos) {
 				if (permissionMap.containsKey(examVo.getExamId())) {
 					examVo.setPermissionVoList(permissionMap.get(examVo.getExamId()));

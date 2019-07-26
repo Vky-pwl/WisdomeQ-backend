@@ -3,11 +3,8 @@
  */
 package com.icat.quest.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -180,14 +177,23 @@ public class UserHasPermissionServiceImpl implements UserHasPermissionService {
 	}
 
 	@Override
-	public Map<Integer, List<PermissionVo>> getPermissionListGroupByExamId(Integer userId, UserType userType) {
+	public Map<Integer, List<PermissionVo>> getPermissionListGroupByExamId(Integer userId, UserType userType,
+																		   List<Exam> examList) {
 		Map<Integer, List<PermissionVo>> permissionListGroupByExamId = new HashMap<>();
+		List<UserHasPermission> userHasPermissions = new ArrayList<>();
 		Map<String, Object> paramsKayAndValues = new HashMap<>();
-		paramsKayAndValues.put("_1_userId", userId);
-		paramsKayAndValues.put("_2_userType", userType);
-		paramsKayAndValues.put("_3_active", true);
-		List<UserHasPermission> userHasPermissions = userHasPermissionDao.listEntityByParameter(
-				UserHasPermissionDao.findAllPermissionByUserIdAndUserType, paramsKayAndValues, null, null);
+		if (userType.name().equals(UserType.SUPERADMIN.name())) {
+			paramsKayAndValues.put("_1_active", true);
+			userHasPermissions = userHasPermissionDao.listEntityByParameter(
+					UserHasPermissionDao.findAllPermissions, paramsKayAndValues, null, null);
+		} else {
+			paramsKayAndValues.put("_1_userId", userId);
+			paramsKayAndValues.put("_2_userType", userType);
+			paramsKayAndValues.put("_3_active", true);
+			paramsKayAndValues.put("_4_examId", examList.stream().map(Exam::getExamId).collect(Collectors.toList()));
+			userHasPermissions = userHasPermissionDao.listEntityByParameter(
+					UserHasPermissionDao.findAllPermissionByUserIdAndUserTypeExamId, paramsKayAndValues, null, null);
+		}
 		userHasPermissions.forEach(userHasPermission->{
 			if(permissionListGroupByExamId.containsKey(userHasPermission.getExam().getExamId())) {
 				permissionListGroupByExamId.get(userHasPermission.getExam().getExamId()).add(Transformer.PERMISSION_TRANSFORMER.transform(userHasPermission.getPermission()));
