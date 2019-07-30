@@ -190,9 +190,14 @@ public class UserHasPermissionServiceImpl implements UserHasPermissionService {
 			paramsKayAndValues.put("_1_userId", userId);
 			paramsKayAndValues.put("_2_userType", userType);
 			paramsKayAndValues.put("_3_active", true);
-			paramsKayAndValues.put("_4_examId", examList.stream().map(Exam::getExamId).collect(Collectors.toList()));
-			userHasPermissions = userHasPermissionDao.listEntityByParameter(
-					UserHasPermissionDao.findAllPermissionByUserIdAndUserTypeExamId, paramsKayAndValues, null, null);
+			if(examList.size()>0) {
+				paramsKayAndValues.put("_4_examId", examList.stream().map(Exam::getExamId).collect(Collectors.toList()));
+				userHasPermissions = userHasPermissionDao.listEntityByParameter(
+						UserHasPermissionDao.findAllPermissionByUserIdAndUserTypeExamId, paramsKayAndValues, null, null);
+			} else {
+				userHasPermissions = userHasPermissionDao.listEntityByParameter(
+						UserHasPermissionDao.findAllPermissionByUserIdAndUserType, paramsKayAndValues, null, null);
+			}
 		}
 		userHasPermissions.forEach(userHasPermission->{
 			if(permissionListGroupByExamId.containsKey(userHasPermission.getExam().getExamId())) {
