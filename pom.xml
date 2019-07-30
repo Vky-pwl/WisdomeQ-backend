@@ -1,180 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.icat</groupId>
-	<artifactId>quest</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
+    <groupId>com.icat</groupId>
+    <artifactId>quest</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-	<name>quest</name>
-	<url>http://maven.apache.org</url>
-
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-		<start-class>com.icat.quest</start-class>
-		<failOnMissingWebXml>false</failOnMissingWebXml>
-		<spring.version>5.0.4.RELEASE</spring.version>
-		<org.springframework-version-release>5.0.4.RELEASE</org.springframework-version-release>
-		<hibernate.version>5.2.12.Final</hibernate.version>
-		<hibernate.validator>6.0.5.Final</hibernate.validator>
-		<c3p0.version>0.9.5.2</c3p0.version>
-		<servlets.version>4.0.1</servlets.version>
-		<jsp.version>2.3.3</jsp.version>
-		<org.apache.shiro-version>1.4.0</org.apache.shiro-version>
-		<org.aspectj-version>1.8.12</org.aspectj-version>
-		
-	</properties>
-	<dependencies>
-	
-	
-	
-		<!-- Servlet Dependency -->
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>${servlets.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
+    <name>quest</name>
+    <url>http://maven.apache.org</url>
 
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <start-class>com.icat.quest</start-class>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <spring.version>5.0.4.RELEASE</spring.version>
+        <org.springframework-version-release>5.0.4.RELEASE</org.springframework-version-release>
+        <hibernate.version>5.2.12.Final</hibernate.version>
+        <hibernate.validator>6.0.5.Final</hibernate.validator>
+        <c3p0.version>0.9.5.2</c3p0.version>
+        <servlets.version>4.0.1</servlets.version>
+        <jsp.version>2.3.3</jsp.version>
+        <org.apache.shiro-version>1.4.0</org.apache.shiro-version>
+        <org.aspectj-version>1.8.12</org.aspectj-version>
 
-	
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${org.springframework-version-release}</version>
-		</dependency>
+    </properties>
+    <dependencies>
 
 
-	
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
+        <!-- Servlet Dependency -->
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlets.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
 
-		<!-- Test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
-	
- <dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <version>1.2.16</version>
-    </dependency>
-
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-log4j12</artifactId>
-        <version>1.6.4</version>
-    </dependency>	
-	</dependencies>
-
-	<build>
-		<sourceDirectory>src/main/java</sourceDirectory>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
 
-		<plugins>
-
-<!--  <plugin>
-    <groupId>org.hibernate.orm.tooling</groupId>
-    <artifactId>hibernate-enhance-maven-plugin</artifactId>
-    <version>${hibernate.version}</version>
-    <executions>
-        <execution>
-            <configuration>
-                <enableLazyInitialization>true</enableLazyInitialization>
-            </configuration>
-            <goals>
-                <goal>enhance</goal>
-            </goals>
-        </execution>
-    </executions>
-</plugin> -->
-
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.0</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-
-			<!-- Embedded Apache Tomcat required for testing war -->
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat9-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<path>/</path>
-				</configuration>
-			</plugin>
-			
-			
-		</plugins>
-	</build>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${org.springframework-version-release}</version>
+        </dependency>
 
 
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
 
 
+        <!-- Test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
 
-	<modules>
-		
-		<module>quest-common</module>
-		<module>quest-dao</module>
-		
-		
-		
-		
-		<module>quest-auth</module>
-		<module>quest-cache</module>
-		<module>quest-aop</module>
-		<module>quest-email</module>
-		<module>quest-scheduler</module>
-		<module>quest-admin</module>
-		<module>quest-user</module>
-		<module>quest-web</module>
-	</modules>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.4</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+
+
+        <plugins>
+
+            <!--  <plugin>
+                <groupId>org.hibernate.orm.tooling</groupId>
+                <artifactId>hibernate-enhance-maven-plugin</artifactId>
+                <version>${hibernate.version}</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <enableLazyInitialization>true</enableLazyInitialization>
+                        </configuration>
+                        <goals>
+                            <goal>enhance</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin> -->
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <!-- Embedded Apache Tomcat required for testing war -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>http://localhost:8080/manager/script</url>
+                    <server>TomcatServer</server>
+                    <path>/${project.build.finalName}</path>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <modules>
+        <module>quest-common</module>
+        <module>quest-dao</module>
+        <module>quest-auth</module>
+        <module>quest-cache</module>
+        <module>quest-aop</module>
+        <module>quest-email</module>
+        <module>quest-scheduler</module>
+        <module>quest-admin</module>
+        <module>quest-user</module>
+        <module>quest-web</module>
+    </modules>
 </project>
