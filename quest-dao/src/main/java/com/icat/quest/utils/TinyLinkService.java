@@ -91,10 +91,10 @@ public class TinyLinkService {
 	// all the above URL should point to same shortened URL
 	// There could be several other cases like these.
 	String sanitizeURL(String url) {
-		if (url.substring(0, 7).equals("http://"))
+		if (url.length()>=7 && url.substring(0, 7).equals("http://"))
 			url = url.substring(7);
 
-		if (url.substring(0, 8).equals("https://"))
+		if (url.length()>=8 && url.substring(0, 8).equals("https://"))
 			url = url.substring(8);
 
 		if (url.charAt(url.length() - 1) == '/')
