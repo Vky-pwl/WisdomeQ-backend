@@ -97,16 +97,16 @@ public class CandidateExamServiceImpl implements CandidateExamService {
 			examVos = transformExamVoList(testConductorHasTestCodeList);
 			responseMap.put("examVoList", examVos);
 		} else {
-			if (attended != null) {
+			/*if (attended != null) {
 				paramsKayAndValues.put("_2_attended", attended);
 				testConductorHasTestCodeList = testConductorHasTestCodeDao.listEntityByParameter(
 						TestConductorHasTestCodeDao.listExamByCandidateIdByAttended, paramsKayAndValues, startIndex,
 						pageSize);
-			} else {
+			} else {*/
 				testConductorHasTestCodeList = testConductorHasTestCodeDao.listEntityByParameter(
 						TestConductorHasTestCodeDao.listExamByCandidateId, paramsKayAndValues, startIndex, pageSize);
 
-			}
+			//}
 			examVos = transformExamVoList(testConductorHasTestCodeList);
 			responseMap.put("examVoList", examVos);
 		}
