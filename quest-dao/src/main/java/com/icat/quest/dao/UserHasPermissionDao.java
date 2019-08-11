@@ -16,7 +16,7 @@ public interface UserHasPermissionDao extends GenericDao<UserHasPermission,Integ
 	
 	public String findAllPermissionByUserIdAndUserTypeExamId="from com.icat.quest.model.UserHasPermission userHasPermission where "
 			+ "userHasPermission.userId =:_1_userId and userHasPermission.userType =:_2_userType and " +
-			"userHasPermission.active = :_3_active and userHasPermission.exam.examId =:_4_examId order by " +
+			"userHasPermission.active = :_3_active and userHasPermission.exam.examId in :_4_examId order by " +
 			"userHasPermission.userHasPermissionId desc";
 	
 	public String findAllByExamIdAndUserId="from com.icat.quest.model.UserHasPermission userHasPermission where "
