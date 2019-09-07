@@ -96,7 +96,7 @@ public class DbHibernateConfig<T, PK extends Serializable> {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("/admin/**", "authc, roles[admin]");
 		map.put("/docs/**", "questAuthc, perms[document:read]");
-		map.put("/api/**/ui/**", "questAuthc");
+		//map.put("/api/**/ui/**", "questAuthc");
 		map.put("/quest-receiver/**", "questAuthc");
 		map.put("/api/**/logout", "logout");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
