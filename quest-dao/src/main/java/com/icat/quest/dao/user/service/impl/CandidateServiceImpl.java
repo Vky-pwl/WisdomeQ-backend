@@ -90,7 +90,11 @@ public class CandidateServiceImpl implements CandidateService {
 			candidate.setAdhaarNumber(candidateVo.getAdhaarNumber());
 			candidate.setTenthPercentage(candidateVo.getTenthPercentage());
 			candidate.setContactEmail(candidateVo.getContactEmail());
-			candidate.setPassword(candidateVo.getPassword());
+			candidate.setPassword((candidateVo.getPassword() != null
+					&& !candidateVo.getPassword().isEmpty())
+					? candidateVo.getPassword()
+					: "-w@lc0me2019"
+			);
 			candidate.setContactNumber(candidateVo.getContactNumber());
 
 			candidate.setCreated(new Date());
