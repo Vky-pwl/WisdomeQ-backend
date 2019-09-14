@@ -166,9 +166,15 @@ public class TestConductorServiceImpl implements TestConductorService {
 		if (pageNo == 1) {
 			startIndex = (pageNo * pageSize) - pageSize;
 			testConductorResultSet.put("count", testConductorList.size());
-			testConductorList.stream().skip(startIndex).limit(pageSize).forEach(testConductor -> {
-				testConductorVos.add(Transformer.TEST_CONDUCTOR_TRANSFORMER.transform(testConductor));
-			});
+			if(testConductorList.size()<=startIndex){
+				testConductorList.stream().forEach(testConductor -> {
+					testConductorVos.add(Transformer.TEST_CONDUCTOR_TRANSFORMER.transform(testConductor));
+				});
+			}else{
+				testConductorList.stream().skip(startIndex).limit(pageSize).forEach(testConductor -> {
+					testConductorVos.add(Transformer.TEST_CONDUCTOR_TRANSFORMER.transform(testConductor));
+				});
+			}
 		} else {
 			testConductorList.forEach(testConductor -> {
 				testConductorVos.add(Transformer.TEST_CONDUCTOR_TRANSFORMER.transform(testConductor));
@@ -223,8 +229,12 @@ public class TestConductorServiceImpl implements TestConductorService {
 	}
 
 	private void getPermissionsForTestConductor(List<TestConductorVo> testConductorVos, String adminType){
+		if(testConductorVos.size()==0){
+			return;
+		}
 		testConductorVos.forEach((testConductorVo -> {
 			Map<String, Object> params = new HashMap<>();
+			List<UserHasPermission> userHasPermissionList = new ArrayList<>();
 			params.put("_1_testConductorId", testConductorVo.getTestConductorId());
 			List<TestConductorLicense> testConductorLicenseList =
 					testConductorLicenseDao.listEntityByParameter(TestConductorLicenseDao.findAllByTestConductorId,
@@ -233,9 +243,16 @@ public class TestConductorServiceImpl implements TestConductorService {
 			params.put("_1_userId",testConductorVo.getTestConductorId());
 			params.put("_2_userType",UserType.valueOf(adminType));
 			params.put("_3_active",testConductorVo.getActive());
-			params.put("_4_examId", testConductorLicenseList.get(0).getExam().getExamId());
-			List<UserHasPermission> userHasPermissionList =
-					userHasPermissionDao.listEntityByParameter(UserHasPermissionDao.findAllPermissionByUserIdAndUserTypeExamId, params, null, null);
+			if(testConductorLicenseList.size()>0){
+				params.put("_4_examId", testConductorLicenseList.get(0).getExam().getExamId());
+				userHasPermissionList =
+						userHasPermissionDao.listEntityByParameter(
+								UserHasPermissionDao.findAllPermissionByUserIdAndUserTypeExamId, params, null, null);
+			}else{
+				userHasPermissionList =
+						userHasPermissionDao.listEntityByParameter(
+								UserHasPermissionDao.findAllPermissionByUserIdAndUserType, params, null, null);
+			}
 			List<PermissionVo> permissionVoList = userHasPermissionList.stream().map(
 					(userHasPermission) -> Transformer.PERMISSION_TRANSFORMER.transform(userHasPermission.getPermission()))
 					.collect(Collectors.toList());

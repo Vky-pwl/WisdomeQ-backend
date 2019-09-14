@@ -121,7 +121,15 @@ public class ExamResultController {
 					: null;
 		    Long endDate = requestobject.get("endDate") != null
 					? Long.parseLong(requestobject.get("endDate").toString().trim())
-					: null;			
+					: null;
+		    String filterKey = requestobject.get("filterKey") !=null ?
+					requestobject.get("filterKey").toString().trim() : null;
+		    String filterValue = requestobject.get("filterValue") !=null ?
+					requestobject.get("filterValue").toString().trim() : null;
+		    String sortBy = requestobject.get("sortBy") != null ? requestobject.get("sortBy").toString().trim() :
+					"percentile";
+			String sortOrder = requestobject.get("sortBy") != null ? requestobject.get("sortOrder").toString().trim() :
+					"desc";
 			if (!principalVo.getUserType().equals(UserType.SUPERADMIN)) {
 				collegeId = principalVo.getCollegeId();
 			}

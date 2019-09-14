@@ -397,7 +397,7 @@ public class TestConductorLicenseServiceImpl implements TestConductorLicenseServ
                 testConductorLicenseVos
                         .add(Transformer.TESTCONDUCTOR_LICENSE_TRANSFORMER.transform(testConductorLicense));
             });
-            //setPermissionExam(testConductorLicenseVos, userType, userId);
+            setPermissionExam(testConductorLicenseVos, userType, userId);
 
         } else {
             List<TestConductorLicense> testConductorLicenseList = testConductorLicenseDao.listEntityByParameter(
@@ -406,11 +406,18 @@ public class TestConductorLicenseServiceImpl implements TestConductorLicenseServ
                 testConductorLicenseVos
                         .add(Transformer.TESTCONDUCTOR_LICENSE_TRANSFORMER.transform(testConductorLicense));
             });
-            //setPermissionExam(testConductorLicenseVos, userType, userId);
-
+            setPermissionExam(testConductorLicenseVos, userType, userId);
         }
-        testConductorLicenseResultSet.put("testConductorLicenseVoList", testConductorLicenseVos);
         getPermissionsForTestConductorLicenseList(testConductorLicenseVos, userType);
+        /*testConductorLicenseVos = testConductorLicenseVos.stream()
+                .filter(testConductorLicenseVo -> testConductorLicenseVo.getExamVo().getPermissionVoList() != null && testConductorLicenseVo.getTestConductorVo().getPermissionVos() == null)
+                .map(testConductorLicenseVo -> {
+                    TestConductorVo testConductorVo = testConductorLicenseVo.getTestConductorVo();
+                    testConductorVo.setPermissionVos(testConductorLicenseVo.getExamVo().getPermissionVoList());
+                    testConductorLicenseVo.setTestConductorVo(testConductorVo);
+                    return testConductorLicenseVo;
+                }).collect(Collectors.toList());*/
+        testConductorLicenseResultSet.put("testConductorLicenseVoList", testConductorLicenseVos);
         return testConductorLicenseResultSet;
     }
 
@@ -429,24 +436,38 @@ public class TestConductorLicenseServiceImpl implements TestConductorLicenseServ
         return testConductorLicenseVos;
     }
 
-	/*private void setPermissionExam(List<TestConductorLicenseVo> testConductorLicenseVos, UserType userType,
+	private void setPermissionExam(List<TestConductorLicenseVo> testConductorLicenseVos, UserType userType,
 			Integer userId) {
 
 		if (userType != null && userId != null) {
+            List<Exam> examList = testConductorLicenseVos.stream()
+                    .filter(testConductorLicenseVo -> testConductorLicenseVo.getExamVo() != null && testConductorLicenseVo.getExamVo().getExamId() != null)
+                    .map(testConductorLicenseVo -> {
+                        Exam exam = new Exam();
+                        exam.setExamId(testConductorLicenseVo.getExamVo().getExamId());
+                        return exam;
+                    })
+                    .collect(Collectors.toList());
 			Map<Integer, List<PermissionVo>> permissionMap = userHasPermissionService
-					.getPermissionListGroupByExamId(userId, userType);
+                    .getPermissionListGroupByExamId(userId, userType, examList);
 			for (TestConductorLicenseVo testConductorLicenseVo : testConductorLicenseVos) {
 				if (permissionMap.containsKey(testConductorLicenseVo.getExamVo().getExamId())) {
 					testConductorLicenseVo.getExamVo()
 							.setPermissionVoList(permissionMap.get(testConductorLicenseVo.getExamVo().getExamId()));
+					testConductorLicenseVo.getTestConductorVo().setPermissionVos(permissionMap.get(testConductorLicenseVo.getExamVo().getExamId()));
 				}
 			}
 		}
-	}*/
+	}
 
     private void getPermissionsForTestConductorLicenseList(List<TestConductorLicenseVo> testConductorLicenseVoList,
                                                            UserType adminType) {
         testConductorLicenseVoList.forEach((testConductorLicenseVo -> {
+            if (testConductorLicenseVo != null
+                    && testConductorLicenseVo.getTestConductorVo() != null
+                    && testConductorLicenseVo.getTestConductorVo().getPermissionVos() != null) {
+                return;
+            }
             Map<String, Object> params = new HashMap<>();
             TestConductorVo testConductorVo = testConductorLicenseVo.getTestConductorVo();
             params.put("_1_userId", testConductorVo.getTestConductorId());
