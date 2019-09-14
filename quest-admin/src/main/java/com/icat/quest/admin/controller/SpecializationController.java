@@ -105,15 +105,16 @@ public class SpecializationController {
 			Locale locale, Model model, Principal principal) {
 
 		try {
+			/*
 			PrincipalVo principalVo = PrincipalParseService.trimPrincipalToken(principal.getName());
-			/*if (principalVo == null || principalVo.getUserId() == null) {
+			if (principalVo == null || principalVo.getUserId() == null) {
 				LOGGER.warn("Access Not Authorized User");
 				return new ResponseBuilder(false).status(ResponseBuilder.Status.error)
 						.message("Access Not Authorized User").build();
-			}*/
+			}
 			LOGGER.info("LoggedUserId: " + principalVo.getUserId() + "\tUserType: " + principalVo.getUserType());
 			Integer userId = principalVo != null ? principalVo.getUserId() : null;
-
+			*/
 			Integer pageNo = requestobject.get("pageNo") != null
 					? Integer.parseInt(requestobject.get("pageNo").toString().trim())
 					: null;
@@ -128,7 +129,7 @@ public class SpecializationController {
 			LOGGER.info("Specilization List Input: " + requestobject);
 
 			Map<String, Object> specializationVoList = specializationService.listSpecialization(pageNo, pageSize,
-					searchKey, active, userId);
+					searchKey, active, null);
 			return new ResponseBuilder(false).status(ResponseBuilder.Status.success).object(specializationVoList)
 					.build();
 		} catch (Exception e) {
